@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     Windows/warning.cpp \
     arduinolistener.cpp \
     printerconfigs.cpp \
-    manualcontrol.cpp
+    manualcontrol.cpp \
+    control3d.cpp
 
 HEADERS  += brprint3d.h \
     glwidget.h \
@@ -48,7 +49,8 @@ HEADERS  += brprint3d.h \
     Windows/warning.h \
     arduinolistener.h \
     printerconfigs.h \
-    manualcontrol.h
+    manualcontrol.h \
+    control3d.h
 
 FORMS    += \
     Pandora.ui \
@@ -59,7 +61,8 @@ FORMS    += \
     Windows/loading.ui \
     Windows/warning.ui \
     printerconfigs.ui \
-    manualcontrol.ui
+    manualcontrol.ui \
+    control3d.ui
 
 RESOURCES += \
     images.qrc \
