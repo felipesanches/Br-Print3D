@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>380</width>
-    <height>500</height>
+    <width>390</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,22 +16,22 @@
   <widget class="QGroupBox" name="Menu_Control_LeftBlock">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>381</width>
-     <height>491</height>
+     <x>5</x>
+     <y>5</y>
+     <width>380</width>
+     <height>540</height>
     </rect>
    </property>
    <property name="title">
     <string>Printer  Configs</string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>10</y>
       <width>374</width>
-      <height>481</height>
+      <height>524</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -54,6 +54,13 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
+          <widget class="QPushButton" name="bt_hide">
+           <property name="text">
+            <string>Configuration - Show</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="bt_saveConfig">
            <property name="text">
             <string>Save</string>
@@ -72,6 +79,19 @@
       </layout>
      </item>
      <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QTabWidget" name="Config">
        <property name="currentIndex">
         <number>0</number>
@@ -81,6 +101,20 @@
          <string>Connection</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout">
+         <item row="6" column="2">
+          <widget class="QCheckBox" name="ck_resetonEmergency">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="lb_Protocol">
+           <property name="text">
+            <string>Firmware:</string>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="1" colspan="4">
           <widget class="QComboBox" name="cb_Transmition_Rate">
            <item>
@@ -132,10 +166,10 @@
            </item>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="lb_Protocol">
+         <item row="7" column="2">
+          <widget class="QCheckBox" name="ck_logImpressao">
            <property name="text">
-            <string>Firmware:</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -146,10 +180,10 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="lb_Cache">
+         <item row="5" column="2">
+          <widget class="QCheckBox" name="ck_resetonConnect">
            <property name="text">
-            <string>Cache size:</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -160,68 +194,10 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="lb_Connection">
+         <item row="4" column="0">
+          <widget class="QLabel" name="lb_Cache">
            <property name="text">
-            <string>Connection:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0" colspan="2">
-          <widget class="QLabel" name="lb_ResetE">
-           <property name="text">
-            <string>Reset on Emergency:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" colspan="4">
-          <widget class="QComboBox" name="cb_Firmware">
-           <item>
-            <property name="text">
-             <string>Repetier</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Marlin</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="lb_Transmission">
-           <property name="text">
-            <string>Transmission Rate:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="2">
-          <widget class="QCheckBox" name="ck_resetonEmergency">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1" colspan="4">
-          <widget class="QComboBox" name="cb_Cache_Size">
-           <item>
-            <property name="text">
-             <string>127</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="5" column="2">
-          <widget class="QCheckBox" name="ck_resetonConnect">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="2">
-          <widget class="QCheckBox" name="ck_logImpressao">
-           <property name="text">
-            <string/>
+            <string>Cache size:</string>
            </property>
           </widget>
          </item>
@@ -246,6 +222,63 @@
            </item>
           </widget>
          </item>
+         <item row="4" column="1" colspan="4">
+          <widget class="QComboBox" name="cb_Cache_Size">
+           <item>
+            <property name="text">
+             <string>127</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_Transmission">
+           <property name="text">
+            <string>Transmission Rate:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1" colspan="4">
+          <widget class="QComboBox" name="cb_Firmware">
+           <item>
+            <property name="text">
+             <string>Repetier</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Marlin</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_Connection">
+           <property name="text">
+            <string>Connection:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0" colspan="2">
+          <widget class="QLabel" name="lb_ResetE">
+           <property name="text">
+            <string>Reset on Emergency:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="2">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
        </widget>
        <widget class="QWidget" name="Print_Config">
@@ -253,88 +286,14 @@
          <string>Printer Specs</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="lb_RateMoviment">
-           <property name="text">
-            <string>Moviment Rate(mm/min):</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_RateMoviment"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lb_Feed_Z">
-           <property name="text">
-            <string>Feed Z Axis(mm/min):</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_FeedZ"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="lb_ExtruderV">
-           <property name="text">
-            <string>Extruder Speed(mm/s):</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="tb_ExtrusorSpeed_mm"/>
-         </item>
-         <item row="2" column="2">
-          <widget class="QLineEdit" name="tb_ExtruderSpeed_Sec"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="lg_Velocity_R">
-           <property name="text">
-            <string>Retraction Speed(mm/s):</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_SpeedRetraction"/>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="lb_Extruder_Temper">
-           <property name="text">
-            <string>Extruder Temperature(ºC):</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_ExtruderTemperature"/>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="lb_TableTemperature">
-           <property name="text">
-            <string>Bed Temperature(ºC):</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_Table_Temperature"/>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="lb_areax">
-           <property name="text">
-            <string>Print Area - Width(mm)(X):</string>
-           </property>
-          </widget>
+         <item row="7" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_AreaPrint_Y"/>
          </item>
          <item row="6" column="1" colspan="2">
           <widget class="QLineEdit" name="tb_AreaPrint_X"/>
          </item>
-         <item row="7" column="0">
-          <widget class="QLabel" name="lb_areay">
-           <property name="text">
-            <string>Print Area - Height(mm)(Y):</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_AreaPrint_Y"/>
+         <item row="1" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_FeedZ"/>
          </item>
          <item row="8" column="0">
           <widget class="QLabel" name="lb_areaz">
@@ -345,6 +304,80 @@
          </item>
          <item row="8" column="1" colspan="2">
           <widget class="QLineEdit" name="tb_AreaPrint_Z"/>
+         </item>
+         <item row="3" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_SpeedRetraction"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_ExtruderV">
+           <property name="text">
+            <string>Extruder Speed(mm/s):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_ExtruderTemperature"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="lg_Velocity_R">
+           <property name="text">
+            <string>Retraction Speed(mm/s):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="lb_Extruder_Temper">
+           <property name="text">
+            <string>Extruder Temperature(ºC):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="lb_areax">
+           <property name="text">
+            <string>Print Area - Width(mm)(X):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="lb_TableTemperature">
+           <property name="text">
+            <string>Bed Temperature(ºC):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="lb_areay">
+           <property name="text">
+            <string>Print Area - Height(mm)(Y):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lb_Feed_Z">
+           <property name="text">
+            <string>Feed Z Axis(mm/min):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLineEdit" name="tb_ExtruderSpeed_Sec"/>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="tb_ExtrusorSpeed_mm"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_RateMoviment">
+           <property name="text">
+            <string>Moviment Rate(mm/min):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_Table_Temperature"/>
+         </item>
+         <item row="0" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_RateMoviment"/>
          </item>
         </layout>
        </widget>

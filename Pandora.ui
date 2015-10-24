@@ -49,19 +49,6 @@
    <enum>Qt::ToolButtonTextUnderIcon</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="bt_hide">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Configuration - Show</string>
-    </property>
-   </widget>
    <widget class="Line" name="line_5">
     <property name="geometry">
      <rect>
@@ -73,16 +60,6 @@
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QOpenGLWidget" name="openGLWidget">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>120</y>
-      <width>300</width>
-      <height>200</height>
-     </rect>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -327,6 +304,31 @@
      </item>
     </layout>
    </widget>
+   <widget class="PrinterConfigs" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>380</width>
+      <height>550</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>380</width>
+      <height>550</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>380</width>
+      <height>550</height>
+     </size>
+    </property>
+    <property name="title">
+     <string>GroupBox</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -527,9 +529,14 @@
    </property>
   </action>
  </widget>
- <tabstops>
-  <tabstop>bt_hide</tabstop>
- </tabstops>
+ <customwidgets>
+  <customwidget>
+   <class>PrinterConfigs</class>
+   <extends>QGroupBox</extends>
+   <header>printerconfigs.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="images.qrc"/>
  </resources>
