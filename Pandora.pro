@@ -28,7 +28,9 @@ SOURCES += main.cpp\
     Windows/legalwarning.cpp \
     Windows/loading.cpp \
     Windows/warning.cpp \
-    arduinolistener.cpp
+    arduinolistener.cpp \
+    printerconfigs.cpp \
+    manualcontrol.cpp
 
 HEADERS  += brprint3d.h \
     glwidget.h \
@@ -44,7 +46,9 @@ HEADERS  += brprint3d.h \
     Windows/legalwarning.h \
     Windows/loading.h \
     Windows/warning.h \
-    arduinolistener.h
+    arduinolistener.h \
+    printerconfigs.h \
+    manualcontrol.h
 
 FORMS    += \
     Pandora.ui \
@@ -53,7 +57,9 @@ FORMS    += \
     Windows/help.ui \
     Windows/legalwarning.ui \
     Windows/loading.ui \
-    Windows/warning.ui
+    Windows/warning.ui \
+    printerconfigs.ui \
+    manualcontrol.ui
 
 RESOURCES += \
     images.qrc \
