@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QOpenGLWidget" name="openGLWidget">
+  <widget class="Glwidget" name="openGLWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -24,6 +24,13 @@
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Glwidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header>glwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

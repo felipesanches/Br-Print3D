@@ -7,10 +7,15 @@
 #include <Windows/help.h>
 #include <Windows/legalwarning.h>
 #include <Windows/loading.h>
+
 #include "points.h"
 #include "KI/Repetier.h"
 #include "threadRotine.h"
 #include "arduinolistener.h"
+#include "control3d.h"
+#include "manualcontrol.h"
+#include "printerconfigs.h"
+
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -26,6 +31,8 @@
 #include <QInputDialog>
 #include <QList>
 #include <QStandardPaths>
+
+
 
 namespace Ui {
 class BrPrint3D;
