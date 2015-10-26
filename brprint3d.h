@@ -62,8 +62,7 @@ private slots:
     void on_bt_stop_clicked();
     void on_bt_emergency_clicked();
 
-    void updateTemp(double *temp_Extruders, double tempTable);
-    void updateExt(double posX, double posY, double posZ);
+
 
     void isPrintJobRunning(bool b);
 
@@ -80,7 +79,7 @@ private:
     QTranslator translator;
     Repetier *printer_object=NULL;
     QStringList *open_files;                            //Lista de arquivos abertos
-    ThreadRoutine *temp=NULL;
+
     arduinoListener *ard_List;
 
     //Definicoes Slicer

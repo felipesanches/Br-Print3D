@@ -2,6 +2,8 @@
 #define MANUALCONTROL_H
 
 #include <QWidget>
+#include <brprint3d.h>
+#include <threadRotine.h>
 
 namespace Ui {
 class ManualControl;
@@ -20,6 +22,10 @@ private:
     Ui::ManualControl *ui;
     void disableAxisButtons();
     void enableAxisButtons();
+    Repetier *printer_object;
+    ThreadRoutine *temp=NULL;
+    int qntExtruders;
+    void stopThreadRoutine();
 
 private slots:
     void on_bt_extruder1_clicked(bool checked);
@@ -47,6 +53,10 @@ private slots:
     void on_bt_home_XYZ_clicked();
     void on_bt_extruderTemp_clicked(bool checked);
     void on_bt_addSlicer_clicked();
+    void getPrinterObject(Repetier *printer_object);
+
+    void updateTemp(double *temp_Extruders, double tempTable);
+    void updateExt(double posX, double posY, double posZ);
 
 };
 
