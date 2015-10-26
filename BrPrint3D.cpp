@@ -637,3 +637,38 @@ void BrPrint3D::closeEvent(QCloseEvent *event)
 
 
 
+
+void BrPrint3D::on_actionEnglish_triggered()
+{
+
+}
+
+void BrPrint3D::on_actionPortuguese_triggered()
+{
+
+}
+
+void BrPrint3D::on_actionLegalWarning_triggered()
+{
+
+}
+
+void BrPrint3D::on_actionClose_triggered()
+{
+
+}
+
+void BrPrint3D::on_actionDocumentation_triggered()
+{
+
+}
+
+void BrPrint3D::on_actionHelp_triggered()
+{
+
+}
+
+void BrPrint3D::on_actionAboutBrPrint_triggered()
+{
+
+}

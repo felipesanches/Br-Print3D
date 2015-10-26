@@ -68,6 +68,20 @@ private slots:
 
 
 
+    void on_actionEnglish_triggered();
+
+    void on_actionPortuguese_triggered();
+
+    void on_actionLegalWarning_triggered();
+
+    void on_actionClose_triggered();
+
+    void on_actionDocumentation_triggered();
+
+    void on_actionHelp_triggered();
+
+    void on_actionAboutBrPrint_triggered();
+
 private:
 
     Ui::BrPrint3D *ui;
