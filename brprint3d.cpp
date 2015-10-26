@@ -868,45 +868,6 @@ void BrPrint3D::closeEvent(QCloseEvent *event)
         event->accept();
 }
 //This Action hide/show buttons of extruders starting from qnt choose by the user
-void ManualControl::on_cb_Extruder_qnt_currentTextChanged(const QString &arg1)
-{   this->extrudersInUse = arg1.toInt();
-    switch (extrudersInUse)
-    {
-    case 1:
-    {
-        ui->bt_extruder2->hide();
-        ui->lb_extruderTemp_2->hide();
-        ui->lbC2->hide();
-
-        ui->bt_extruder3->hide();
-        ui->lb_extruderTemp_3->hide();
-        ui->lbC3->hide();
-
-        ui->bt_extruder4->hide();
-        ui->lb_extruderTemp_4->hide();
-        ui->lbC4->hide();
-    }break;
-    case 2:
-    {   ui->bt_extruder3->hide();
-        ui->lb_extruderTemp_3->hide();
-        ui->lbC3->hide();
-
-        ui->bt_extruder4->hide();
-        ui->lb_extruderTemp_4->hide();
-        ui->lbC4->hide();
-
-    }break;
-    case 3:
-    {
-        ui->bt_extruder4->hide();
-        ui->lb_extruderTemp_4->hide();
-        ui->lbC4->hide();
-    }break;
-
-    default:
-        break;
-    }
-}
 
 
 

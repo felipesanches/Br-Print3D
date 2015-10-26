@@ -45,6 +45,7 @@ private:
 private slots:
     void on_cb_printer_currentTextChanged(const QString &arg1);
     void on_bt_saveConfig_clicked();
+    void on_cb_Extruder_qnt_currentTextChanged(const QString &arg1);
 
 };
 
