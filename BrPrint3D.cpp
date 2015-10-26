@@ -179,8 +179,8 @@ void BrPrint3D::init()
     //Disable Manual Control of Printer
     ui->tb_ManualControl->widget(2)->setEnabled(false);
     //Disable Slicer Tab - Because is not done
-    QTabWidget *t = ui->tb_ManualControl->widget(1);
-    t->widget(2)->setEnabled(false);
+    //QTabWidget *t = ui->tb_ManualControl->widget(1);
+    //t->widget(2)->setEnabled(false);
 
 
     //Start the thread that is listening if Arduino is connect or not
@@ -188,7 +188,7 @@ void BrPrint3D::init()
     connect(ard_List,SIGNAL(arduinoConnect(bool)),this,SLOT(locate_Arduino(bool)));
     this->ard_List->start();
     //Connect a signal to hide extruders if change on qnt of extruders
-    connect(ui->gb_PrinterConfigs,SIGNAL(hideExtruders(int),ui->tb_ManualControl,SLOT(hideExtruders(int)));
+    connect(ui->gb_PrinterConfigs,SIGNAL(hideExtruders(int)),ui->tb_ManualControl,SLOT(hideExtruders(int)));
 }
 /*-----------Actions of MenuBar----------*/
 //This Action Close the program - Necessary???
