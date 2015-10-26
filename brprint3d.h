@@ -115,16 +115,6 @@ private:
     ThreadRoutine *temp=NULL;
     arduinoListener *ard_List;
 
-
-    //Definicoes PLA
-    QString extruder_temperature_PLA;           //Temperatura do Extrusor
-    QString table_temperature_PLA;              //Temperatura da Mesa
-    QString fil_espessure_PLA;                  //Espessura do Filamento
-
-    //Definicoes ABS
-    QString extruder_temperature_ABS;           //Temperatura do Extrusor
-    QString table_temperature_ABS;              //Temperatura da Mesa
-    QString fil_espessure_ABS;                  //Espessura do Filamento
     //Definicoes Slicer
     QString pathslicer;                         //Caminho do slicer
     QString pathcura;                           //Caminho Cura
