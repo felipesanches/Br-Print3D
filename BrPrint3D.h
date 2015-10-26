@@ -102,7 +102,7 @@ private:
 protected:
     void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 signals:
-    setExtrudersQnt(int q);
+    void setExtrudersQnt(int q);
 
 };
 

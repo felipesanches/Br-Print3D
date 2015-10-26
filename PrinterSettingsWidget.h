@@ -29,7 +29,7 @@ private slots:
     void on_cb_Extruder_qnt_currentTextChanged(const QString &arg1);
     int extrudersInUse;
 signals:
-    hideExtruders(int e);
+    void hideExtruders(int e);
 
 
 
