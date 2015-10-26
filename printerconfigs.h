@@ -2,6 +2,7 @@
 #define PRINTERCONFIGS_H
 
 #include <QWidget>
+#include <QSettings>
 
 namespace Ui {
 class PrinterConfigs;

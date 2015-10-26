@@ -316,7 +316,7 @@
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
-    <widget class="PrinterConfigs" name="groupBox">
+    <widget class="PrinterConfigs" name="gb_PrinterConfigs">
      <property name="minimumSize">
       <size>
        <width>380</width>
