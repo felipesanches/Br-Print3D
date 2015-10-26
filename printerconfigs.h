@@ -19,6 +19,7 @@ public:
 
 private:
     Ui::PrinterConfigs *ui;
+    QSettings settings;
 
 };
 
