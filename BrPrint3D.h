@@ -87,6 +87,7 @@ private slots:
 private:
 
     Ui::BrPrint3D *ui;
+    PrinterSettings *p;
     double *tempMesa;
     double *tempExtruders;
     int extrudersInUse,qntExtruders;

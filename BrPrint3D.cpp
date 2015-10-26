@@ -272,7 +272,7 @@ void BrPrint3D::locate_Arduino(bool b)
 {   this->ard_List->wait(2000);
     this->ard_List->quit();
     this->ard_List->deleteLater();
-    QList<QString> ports;
+    QStringList ports;
     garbage=std::system("dmesg | grep -i usb > usbport.txt");
     QFile usbport("usbport.txt");
     if(usbport.open(QIODevice::ReadOnly|QIODevice::Text))
@@ -298,7 +298,7 @@ void BrPrint3D::locate_Arduino(bool b)
         }
     }
     if(!ports.isEmpty())
-    {   ui->cb_Connection_Port->addItems(ports);
+    {   ui->gb_PrinterConfigs->setConnectionPort(ports);
         QMessageBox msg;
         msg.setText("The arduino is connect at new ports then default, please check on Configs Menu to switch ports!");
         msg.setIcon(QMessageBox::Information);
@@ -321,7 +321,7 @@ void BrPrint3D::on_bt_import_clicked()
             QString text = in.readAll();
             readgcode(text);
             gcode.close();
-            ui->GCodePreview->setPlainText(text);
+            ui->tb_ManualControl->setGcodePreview(text);
             if(ui->bt_connect->isChecked())
                 ui->bt_play->setEnabled(true);
 
@@ -341,7 +341,7 @@ void BrPrint3D::on_bt_open_clicked()
             QString text = in.readAll();
             readgcode(text);
             gcode.close();
-            ui->GCodePreview->setPlainText(text);
+            ui->tb_ManualControl->setGcodePreview(text);
         }
     }
    /* else if(QFileInfo(filename).completeSuffix()=="STL" ||QFileInfo(filename).completeSuffix()=="stl")
@@ -401,15 +401,15 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
     int maxX,maxY,maxZ,transmitionRate,bufferSize;
     std::string serialPort;
    if(checked==true)
-   {    PrinterSettings p = ui->gb_PrinterConfigs->getCurrentSettings();
-        if(!p.areaX.isEmpty() && !p.areaY.isEmpty() && !p.areaZ.isEmpty())
+   {    this->p = ui->gb_PrinterConfigs->getCurrentSettings();
+        if(!p->areaX.isEmpty() && !p->areaY.isEmpty() && !p->areaZ.isEmpty())
         {
-            maxX = p.areaX.toInt();
-            maxY = p.areaY.toInt();
-            maxZ = p.areaZ.toInt();
-            transmitionRate = p.transmissionRate.toInt();
-            serialPort = p.connectionPort.toInt();
-            bufferSize = p.cacheSize.toInt();
+            maxX = p->areaX.toInt();
+            maxY = p->areaY.toInt();
+            maxZ = p->areaZ.toInt();
+            transmitionRate = p->transmissionRate.toInt();
+            serialPort = p->connectionPort.toInt();
+            bufferSize = p->cacheSize.toInt();
             ui->tb_ManualControl->widget(2)->setEnabled(true);
         }
         else
@@ -420,7 +420,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
              return;
         }
 
-        if(p.resetOnConnect==true)
+        if(p->resetOnConnect==true)
              this->resetWhenConnect = true;
         else
              this->resetWhenConnect = false;
@@ -441,7 +441,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             this->qntExtruders = printer_object->getNoOfExtruders();
             emit setExtrudersQnt(this->qntExtruders);
             //Send to manual control the PrinterObjetct to control the 3dprinter
-            ui->tb_ManualControl->getPrinterObject(&this->printer_object);
+            ui->tb_ManualControl->getPrinterObject(this->printer_object);
 
            //Enable button for start printing
            ui->bt_play->setEnabled(true);
@@ -488,14 +488,11 @@ void BrPrint3D::on_bt_play_clicked()
 {     QMessageBox msg;
      if(!pathGcode.isEmpty())
      {  //destroy the thread
-         this->temp->setLoop(true);
-         this->temp->wait(2000);
-         this->temp->quit();
-         this->temp->~ThreadRoutine();
+         ui->tb_ManualControl->stopThreadRoutine();
          try
          {
             std::string path = pathGcode.toUtf8().constData();
-            this->printer_object->openFile(path,ui->ck_logImpressao->isChecked());
+            this->printer_object->openFile(path,p->printLog);
 
           }
          catch(std::string exc)
@@ -522,7 +519,7 @@ void BrPrint3D::on_bt_play_clicked()
          connect(temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
 
          //Disable some buttons - to safety
-         disableAxisButtons();
+         ui->tb_ManualControl->disableAxisButtons();
          ui->cb_Extruder_qnt->setEnabled(false);
      }
 }
@@ -562,7 +559,7 @@ void BrPrint3D::on_bt_stop_clicked()
 
     for(int i=0;i<this->extrudersInUse;i++)
         this->printer_object->setExtrTemp(i,0);
-    enableAxisButtons();
+    ui->tb_ManualControl->enableAxisButtons();
 }
 //This action stop print job in emergency case
 void BrPrint3D::on_bt_emergency_clicked()
@@ -583,7 +580,7 @@ void BrPrint3D::on_bt_emergency_clicked()
        msg.exec();
        this->printer_object->~Repetier();
        ui->bt_connect->setChecked(false);
-       enableAxisButtons();
+       ui->tb_ManualControl->enableAxisButtons();
 
     }
     catch(std::string exc)

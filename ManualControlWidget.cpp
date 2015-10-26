@@ -631,3 +631,8 @@ void ManualControlWidget::locate_Cura()
         }
     }
 }
+
+void ManualControlWidget::setGcodePreview(QString t)
+{
+    ui->GCodePreview->setPlainText(t);
+}

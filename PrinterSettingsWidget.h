@@ -17,12 +17,14 @@ public:
     explicit PrinterSettingsWidget(QWidget *parent = 0);
     ~PrinterSettingsWidget();
     void init(QSettings *settings);
+    void setConnectionPort(QStringList s);
+    PrinterSettings* getCurrentSettings();
 
 private:
     Ui::PrinterSettingsWidget *ui;
     PrinterSettings loadConfigs(QString q);
     QSettings settings;
-    PrinterSettings getCurrentSettings();
+
 private slots:
     void on_cb_Printer_currentTextChanged(const QString &arg1);
     void on_bt_saveConfig_clicked();

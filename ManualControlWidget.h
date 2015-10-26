@@ -17,20 +17,24 @@ public:
     explicit ManualControlWidget(QWidget *parent = 0);
     ~ManualControlWidget();
     void init();
-
-private:
-    Ui::ManualControlWidget *ui;
-    void disableAxisButtons();
-    void enableAxisButtons();
-    Repetier *printer_object;
-    ThreadRoutine *temp=NULL;
-    int qntExtruders;
+    void setGcodePreview(QString t);
     void stopThreadRoutine();
     void setBedStatus(bool b);
     void setExtruderStatus(bool b);
+    void getPrinterObject(Repetier *printer_object);
+    void disableAxisButtons();
+    void enableAxisButtons();
+
+private:
+    Ui::ManualControlWidget *ui;
+
+    Repetier *printer_object;
+    ThreadRoutine *temp=NULL;
+    int qntExtruders;
     QString pathslicer,pathcura;
     void locateSlicer();
     void locateCura();
+
 
 private slots:
     void on_bt_extruder1_clicked(bool checked);
@@ -58,7 +62,7 @@ private slots:
     void on_bt_home_XYZ_clicked();
     void on_bt_extruderTemp_clicked(bool checked);
     void on_bt_addSlicer_clicked();
-    void getPrinterObject(Repetier *printer_object);
+
 
     void updateTemp(double *temp_Extruders, double tempTable);
     void updateExt(double posX, double posY, double posZ);

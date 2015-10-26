@@ -144,7 +144,7 @@ void PrinterSettingsWidget::on_cb_Extruder_qnt_currentTextChanged(const QString 
 {   this->extrudersInUse = arg1.toInt();
     emit hideExtruders(this->extrudersInUse);
 }
-PrinterSettings PrinterSettingsWidget::getCurrentSettings()
+PrinterSettings* PrinterSettingsWidget::getCurrentSettings()
 {
     PrinterSettings p;
     p.connectionType = ui->cb_Connection_Type->currentText();
@@ -172,4 +172,8 @@ PrinterSettings PrinterSettingsWidget::getCurrentSettings()
     return p;
 
 
+}
+void PrinterSettingsWidget::setConnectionPort(QStringList p)
+{
+    ui->cb_Connection_Port->addItems(p);
 }
