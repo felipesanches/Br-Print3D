@@ -391,16 +391,16 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
     int maxX,maxY,maxZ,transmitionRate,bufferSize;
     std::string serialPort;
    if(checked==true)
-   {
-        if(!ui->tb_AreaPrint_X->text().isEmpty() && !ui->tb_AreaPrint_Y->text().isEmpty() && !ui->tb_AreaPrint_Z->text().isEmpty())
+   {    PrinterSettings p = ui->gb_PrinterConfigs->getCurrentSettings();
+        if(!p.areaX.isEmpty() && !p.areaY.isEmpty() && !p.areaZ.isEmpty())
         {
-            maxX = ui->tb_AreaPrint_X->text().toInt();
-            maxY = ui->tb_AreaPrint_Y->text().toInt();
-            maxZ = ui->tb_AreaPrint_Z->text().toInt();
-            transmitionRate = ui->cb_Transmition_Rate->currentText().toInt();
-            serialPort = ui->cb_Connection_Port->currentText().toStdString();
-            bufferSize = ui->cb_Cache_Size->currentText().toInt();
-            ui->Manual_Control->setEnabled(true);
+            maxX = p.areaX.toInt();
+            maxY = p.areaY.toInt();
+            maxZ = p.areaZ.toInt();
+            transmitionRate = p.transmissionRate.toInt();
+            serialPort = p.connectionPort.toInt();
+            bufferSize = p.cacheSize.toInt();
+            ui->tb_ManualControl->widget(2)->setEnabled(true);
         }
         else
         {    msg.setText(tr("Make sure you have all the necessary settings for connection!"));
@@ -409,11 +409,12 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
              ui->bt_connect->setChecked(false);
              return;
         }
-        //EH POR AQUI QUE COMEÇA MINHA CONFUSAO
-        if(ui->ck_resetonConnect->isChecked()==true)
+
+        if(p.resetOnConnect==true)
              this->resetWhenConnect = true;
         else
              this->resetWhenConnect = false;
+
 
         //This check the decimal point valid
         QLocale locale;
@@ -424,14 +425,13 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             this->isCommaDecimalMark = true;
 
 
-        try{
+        try
+        {
             printer_object = new Repetier(transmitionRate, serialPort, bufferSize, maxX, maxY, maxZ, resetWhenConnect, isCommaDecimalMark);
             this->qntExtruders = printer_object->getNoOfExtruders();
-            for(int i=1;i<=qnt;i++)
-            {   QString item = QVariant(i+1).toString();
-                ui->cb_Extruder_qnt->addItem(item);
-            }
-           ui->tb_ManualControl->getPrinterObject(&this->printer_object);
+            emit setExtrudersQnt(this->qntExtruders);
+            //Send to manual control the PrinterObjetct to control the 3dprinter
+            ui->tb_ManualControl->getPrinterObject(&this->printer_object);
 
            //Enable button for start printing
            ui->bt_play->setEnabled(true);
@@ -445,7 +445,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             msg.setText(e);
             msg.setIcon(QMessageBox::Warning);
             msg.exec();
-            ui->tb_ManualControl->setEnabled(false);
+            ui->tb_ManualControl->widget(2)->setEnabled(false);
             ui->bt_connect->setChecked(false);
         }
 
@@ -467,7 +467,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
        //Off Extruder
        ui->tb_ManualControl->setExtruderStatus(false);
        //Disable the ManualControl
-       ui->tb_ManualControl->setDisabled(true);
+       ui->tb_ManualControl->widget(2)->setEnabled(false);
      }
 }
 

@@ -14,6 +14,7 @@
 #include "arduinolistener.h"
 #include "ManualControlWidget.h"
 #include "PrinterSettingsWidget.h"
+#include "PrinterSettings.h"
 
 #include <stdlib.h>
 #include <iostream>
@@ -72,7 +73,7 @@ private:
     Ui::BrPrint3D *ui;
     double *tempMesa;
     double *tempExtruders;
-    int extrudersInUse;
+    int extrudersInUse,qntExtruders;
     bool isCommaDecimalMark;
     bool resetWhenConnect;
     QTranslator translator;
@@ -100,6 +101,8 @@ private:
 
 protected:
     void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+signals:
+    setExtrudersQnt(int q);
 
 };
 
