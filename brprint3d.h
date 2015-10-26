@@ -114,25 +114,7 @@ private:
     QStringList *open_files;                            //Lista de arquivos abertos
     ThreadRoutine *temp=NULL;
     arduinoListener *ard_List;
-    QString extruderTemperature="";         //Temperatura Default Extrusor
-    QString bedTemperature="";            //Temperatura Default Mesa
-    QString extruderMAXTemp="";             //Temperatura Maxima do Extrusor
-    QString bedMAXTemp="";                //Temperatura Maxima da Mesa
-    QString areaX="2";                       //Tamanho da mesa no eixo X
-    QString areaY="2";                       //Tamanho da mesa no eixo Y
-    QString areaZ="2";                       //Tamanho da mesa no eixo Z
-    QString rateMoviment;                        //Taxa de Movimento da Mesa
-    QString extruderSpeed;                       //Velocidade do Extrusor
-    QString extruderRetraction;                  //Velocidade de Retracao do Extrusor
-    QString extruderQnt;              //Quantidade de extrusores
-    QString connectionType;
-    QString transmissionRate;
-    QString firmwareType;
-    QString cacheSize;
-    QString connectionPort;
-    int resetOnConnect, resetOnEmergency, printLog, qntextruders;
-    QString feedZ;
-    QString extruderMAXVol;
+
 
     //Definicoes PLA
     QString extruder_temperature_PLA;           //Temperatura do Extrusor
