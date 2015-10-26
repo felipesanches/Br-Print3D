@@ -4,18 +4,19 @@
 #include <QWidget>
 #include <KI/Repetier.h>
 #include <threadRotine.h>
-
+#include <QTabWidget>
 namespace Ui {
 class ManualControlWidget;
 }
 
-class ManualControlWidget : public QWidget
+class ManualControlWidget : public QTabWidget
 {
     Q_OBJECT
 
 public:
     explicit ManualControlWidget(QWidget *parent = 0);
     ~ManualControlWidget();
+    void init();
 
 private:
     Ui::ManualControlWidget *ui;
@@ -27,6 +28,7 @@ private:
     void stopThreadRoutine();
     void setBedStatus(bool b);
     void setExtruderStatus(bool b);
+    QString pathslicer,pathcura;
 
 private slots:
     void on_bt_extruder1_clicked(bool checked);

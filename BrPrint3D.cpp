@@ -165,6 +165,9 @@ void BrPrint3D::init()
     //Call init Printer Configs
     ui->gb_PrinterConfigs->init(&settings);
 
+    //Call init Manual Control
+    ui->tb_ManualControl->init();
+
 
     //Hide Config Menu
     ui->Menu_Control_Left->hide();
@@ -173,24 +176,9 @@ void BrPrint3D::init()
     //Disable Play Button
     ui->bt_play->setEnabled(false);
 
-    //If slic3er exists in Ini file, load path, else locate
-    pathslicer=QVariant (settings.value("slic3r")).toString();
-    if(pathslicer.isEmpty())
-        locate_Slicer();
-    else
-    {   ui->cb_Slicer->addItem("Slic3r");
-        ui->bt_addSlicer->setEnabled(false);
-    }
-
-    //If cura exists in Ini file, load path, else locate
-    pathcura=QVariant (settings.value("cura")).toString();
-    if(pathcura.isEmpty())
-        locate_Cura();
-    else
-        ui->cb_Slicer->addItem("Cura Engine");
-
     //Disable Manual Control of Printer
-    ui->Manual_Control->setDisabled(true);
+    ui->tb_ManualControl->find(2)->setDisabled(true);
+    ui->tb_ManualControl->widget(2)->setEnabled(false);
     //Disable Slicer Tab - Because is not done
     ui->Slicer->setEnabled(false);
 

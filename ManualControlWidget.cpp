@@ -24,6 +24,22 @@ void ManualControlWidget::init()
     ui->lb_value_vazaofil->setText(QVariant (ui->sl_filamentFlow->value()).toString());
     ui->lb_extruderTemp_0->setText(QVariant (ui->sl_extruder->value()).toString());
 
+    //If slic3er exists in Ini file, load path, else locate
+    pathslicer=QVariant (settings.value("slic3r")).toString();
+    if(pathslicer.isEmpty())
+        locate_Slicer();
+    else
+    {   ui->cb_Slicer->addItem("Slic3r");
+        ui->bt_addSlicer->setEnabled(false);
+    }
+
+    //If cura exists in Ini file, load path, else locate
+    pathcura=QVariant (settings.value("cura")).toString();
+    if(pathcura.isEmpty())
+        locate_Cura();
+    else
+        ui->cb_Slicer->addItem("Cura Engine");
+
 }
 
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
@@ -549,3 +565,5 @@ void ManualControlWidget::hideExtruders(int e)
         break;
     }
 }
+
+
