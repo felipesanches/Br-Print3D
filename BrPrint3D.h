@@ -82,6 +82,8 @@ private slots:
 
     void on_actionAboutBrPrint_triggered();
 
+    void on_bt_Hide_clicked();
+
 private:
 
     Ui::BrPrint3D *ui;

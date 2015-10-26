@@ -646,4 +646,3 @@ void BrPrint3D::closeEvent(QCloseEvent *event)
 //This Action hide/show buttons of extruders starting from qnt choose by the user
 
 
-
