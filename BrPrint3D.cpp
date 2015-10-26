@@ -191,10 +191,15 @@ void BrPrint3D::init()
     connect(ui->gb_PrinterConfigs,SIGNAL(hideExtruders(int)),ui->tb_ManualControl,SLOT(hideExtruders(int)));
 }
 /*-----------Actions of MenuBar----------*/
-//This Action Close the program - Necessary???
-void BrPrint3D::on_actionFechar_triggered()
+
+//This Action change the language of the program to English
+void BrPrint3D::on_actionEnglish_triggered()
 {
-    //Do some things -> Is print job running? alert Is something that need to be save? alert...
+    qApp->removeTranslator(&translator);
+    translator.load(":/Translations/EN_english.qm");
+    qApp->installTranslator(&translator);
+    ui->retranslateUi(this);
+
 }
 //This Action change the language of the program to Portuguese
 void BrPrint3D::on_actionPortuguese_triggered()
@@ -204,40 +209,45 @@ void BrPrint3D::on_actionPortuguese_triggered()
     qApp->installTranslator(&translator);
     ui->retranslateUi(this);
 }
-//This Action change the language of the program to English
-void BrPrint3D::on_actionEnglish_triggered()
-{
-   qApp->removeTranslator(&translator);
-   translator.load(":/Translations/EN_english.qm");
-   qApp->installTranslator(&translator);
-   ui->retranslateUi(this);
-
-}
 //This action show on screen the Legal Warning Window of BrPrint
-void BrPrint3D::on_actionAviso_Legal_triggered()
+void BrPrint3D::on_actionLegalWarning_triggered()
 {
     LegalWarning *w=new LegalWarning();
     w->show();
+
 }
-//This action show on screen the Documentation Window of BrPrint
-void BrPrint3D::on_actionDocumenta_o_triggered()
+//This Action Close the program - Necessary???
+void BrPrint3D::on_actionClose_triggered()
 {
 
+}
+
+//This action show on screen the Documentation Window of BrPrint
+void BrPrint3D::on_actionDocumentation_triggered()
+{
     Documentation *w= new Documentation();
     w->show();
 }
+
 //This action show on screen the Help Window
-void BrPrint3D::on_actionAjuda_triggered()
+void BrPrint3D::on_actionHelp_triggered()
 {
     Help *w= new Help();
      w->show();
 }
+
 //This action show on screen the about Window of BrPrint
-void BrPrint3D::on_actionSobre_o_BrPrint3D_triggered()
+void BrPrint3D::on_actionAboutBrPrint_triggered()
 {
     aboutBrPrint *w= new aboutBrPrint();
     w->show();
 }
+
+
+
+
+
+
 
 /*----------Actions---------------------*/
 //This action Hide/Show The Configuration of Printer
@@ -637,38 +647,3 @@ void BrPrint3D::closeEvent(QCloseEvent *event)
 
 
 
-
-void BrPrint3D::on_actionEnglish_triggered()
-{
-
-}
-
-void BrPrint3D::on_actionPortuguese_triggered()
-{
-
-}
-
-void BrPrint3D::on_actionLegalWarning_triggered()
-{
-
-}
-
-void BrPrint3D::on_actionClose_triggered()
-{
-
-}
-
-void BrPrint3D::on_actionDocumentation_triggered()
-{
-
-}
-
-void BrPrint3D::on_actionHelp_triggered()
-{
-
-}
-
-void BrPrint3D::on_actionAboutBrPrint_triggered()
-{
-
-}
