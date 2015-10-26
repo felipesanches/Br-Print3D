@@ -307,9 +307,9 @@
    <widget class="QSplitter" name="splitter">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>5</x>
       <y>105</y>
-      <width>1341</width>
+      <width>1346</width>
       <height>550</height>
      </rect>
     </property>
@@ -333,21 +333,8 @@
       <string>GroupBox</string>
      </property>
     </widget>
-    <widget class="Control3D" name="widget" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>530</width>
-       <height>545</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>530</width>
-       <height>545</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="ManualControl" name="tabWidget">
+    <widget class="GLWidget" name="openGLWidget"/>
+    <widget class="ManualControl" name="tb_ManualControl">
      <property name="minimumSize">
       <size>
        <width>425</width>
@@ -586,10 +573,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Control3D</class>
-   <extends>QWidget</extends>
-   <header>control3d.h</header>
-   <container>1</container>
+   <class>GLWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header>glwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>
