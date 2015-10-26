@@ -382,14 +382,14 @@
      <height>24</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuArquivo">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
     <addaction name="separator"/>
-    <addaction name="actionFechar"/>
+    <addaction name="actionClose"/>
    </widget>
-   <widget class="QMenu" name="menuLinguagem">
+   <widget class="QMenu" name="menuLanguage">
     <property name="title">
      <string>Language</string>
     </property>
@@ -397,31 +397,19 @@
     <addaction name="actionPortuguese"/>
     <addaction name="separator"/>
    </widget>
-   <widget class="QMenu" name="menuSobre">
+   <widget class="QMenu" name="menuAbout">
     <property name="title">
      <string>About</string>
     </property>
-    <addaction name="actionAviso_Legal"/>
-    <addaction name="actionDocumenta_o"/>
-    <addaction name="actionAjuda"/>
-    <addaction name="actionSobre_o_BrPrint3D"/>
+    <addaction name="actionLegalWarning"/>
+    <addaction name="actionDocumentation"/>
+    <addaction name="actionHelp"/>
+    <addaction name="actionAboutBrPrint"/>
    </widget>
-   <addaction name="menuArquivo"/>
-   <addaction name="menuLinguagem"/>
-   <addaction name="menuSobre"/>
+   <addaction name="menuFile"/>
+   <addaction name="menuLanguage"/>
+   <addaction name="menuAbout"/>
   </widget>
-  <action name="actionEmergency">
-   <property name="icon">
-    <iconset resource="images.qrc">
-     <normaloff>:/Icons/Icons/bt-emergency.png</normaloff>:/Icons/Icons/bt-emergency.png</iconset>
-   </property>
-   <property name="text">
-    <string>Parada de Emergência</string>
-   </property>
-   <property name="toolTip">
-    <string>Clique aqui para interromper a impressão em caso de emergência.</string>
-   </property>
-  </action>
   <action name="actionEnglish">
    <property name="text">
     <string>English - EUA</string>
@@ -432,12 +420,12 @@
     <string>Portuguese - Brazil</string>
    </property>
   </action>
-  <action name="actionAviso_Legal">
+  <action name="actionLegalWarning">
    <property name="text">
     <string>Legal Warning</string>
    </property>
   </action>
-  <action name="actionFechar">
+  <action name="actionClose">
    <property name="text">
     <string>Exit</string>
    </property>
@@ -457,12 +445,12 @@
     <string>Tema</string>
    </property>
   </action>
-  <action name="actionDocumenta_o">
+  <action name="actionDocumentation">
    <property name="text">
     <string>Documentation</string>
    </property>
   </action>
-  <action name="actionAjuda">
+  <action name="actionHelp">
    <property name="text">
     <string>Help</string>
    </property>
@@ -566,7 +554,7 @@
     <string>Clique aqui para abrir um arquivo.</string>
    </property>
   </action>
-  <action name="actionSobre_o_BrPrint3D">
+  <action name="actionAboutBrPrint">
    <property name="text">
     <string>About Br-Print3D</string>
    </property>
