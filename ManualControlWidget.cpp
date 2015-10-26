@@ -1,18 +1,19 @@
-#include "manualcontrol.h"
-#include "ui_manualcontrol.h"
+#include "ManualControlWidget.h"
+#include "ui_ManualControlWidget.h"
 
-ManualControl::ManualControl(QWidget *parent) :
+ManualControlWidget::ManualControlWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ManualControl)
+    ui(new Ui::ManualControlWidget)
 {
     ui->setupUi(this);
 }
 
-ManualControl::~ManualControl()
+ManualControlWidget::~ManualControlWidget()
 {
     delete ui;
 }
-void ManualControl::init()
+
+void ManualControlWidget::init()
 {
     ui->GCodePreview->setPlainText(tr("No Open File."));
 
@@ -26,7 +27,7 @@ void ManualControl::init()
 }
 
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
-void ManualControl::on_bt_addSlicer_clicked()
+void ManualControlWidget::on_bt_addSlicer_clicked()
 {
     QString filename=QFileDialog::getOpenFileName(this, "Open File",QDir::homePath(),"slic3r");
     ui->cb_Slicer->setItemText(0,"Slic3r");
@@ -35,7 +36,7 @@ void ManualControl::on_bt_addSlicer_clicked()
     ui->bt_addSlicer->setEnabled(false);
 }
 //This action start the job of slicing
-void ManualControl::on_bt_startSlicer_clicked()
+void ManualControlWidget::on_bt_startSlicer_clicked()
 {
     if(ui->cb_Slicer->currentText()=="Slic3r")
     {
@@ -47,7 +48,7 @@ void ManualControl::on_bt_startSlicer_clicked()
     }
 }
 //This action kill the job of slicing
-void ManualControl::on_bt_killSlicer_clicked()
+void ManualControlWidget::on_bt_killSlicer_clicked()
 {
 
 }
@@ -55,43 +56,43 @@ void ManualControl::on_bt_killSlicer_clicked()
 /*-----------Printer Actions - Manual Control----*/
 /*Home Extruder Functions*/
 //This action set Home X Axis
-void ManualControl::on_bt_home_X_clicked()
+void ManualControlWidget::on_bt_home_X_clicked()
 {
     this->printer_object->homeAxis('X');
 
 }
 //This action set Home Y Axis
-void ManualControl::on_bt_home_Y_clicked()
+void ManualControlWidget::on_bt_home_Y_clicked()
 {
     this->printer_object->homeAxis('Y');
 
 }
 //This action set home Z Axis
-void ManualControl::on_bt_home_Z_clicked()
+void ManualControlWidget::on_bt_home_Z_clicked()
 {
     this->printer_object->homeAxis('Z');
 
 }
 //This action set home XYZ Axis
-void ManualControl::on_bt_home_XYZ_clicked()
+void ManualControlWidget::on_bt_home_XYZ_clicked()
 {
     this->printer_object->homeAllAxis();
 
 }
 /*Filament Retract*/
 //This action retract the filament
-void ManualControl::on_bt_filamentoRetract_clicked()
+void ManualControlWidget::on_bt_filamentoRetract_clicked()
 {
     //this->printer_object->extruderControl(0.1,0.1);
 }
 //This action expulse the filament at 1x
-void ManualControl::on_bt_filamentoOneSpeed_clicked()
+void ManualControlWidget::on_bt_filamentoOneSpeed_clicked()
 {
 
 
 }
 //This action expulse the filament at 2x
-void ManualControl::on_bt_filamentoTwoSpeed_clicked()
+void ManualControlWidget::on_bt_filamentoTwoSpeed_clicked()
 {
 
 
@@ -99,24 +100,24 @@ void ManualControl::on_bt_filamentoTwoSpeed_clicked()
 
 /*Sliders Values Set*/
 //This action set the value of velocity of feed of filament to slider and printer
-void ManualControl::on_tb_speedFeedFilament_textChanged(const QString &arg1)
+void ManualControlWidget::on_tb_speedFeedFilament_textChanged(const QString &arg1)
 {
     ui->sl_speedFeedFilament->setValue(arg1.toInt());
 }
 //This action set the value of filament Flow to slider and printer
-void ManualControl::on_tb_filamentFlow_textChanged(const QString &arg1)
+void ManualControlWidget::on_tb_filamentFlow_textChanged(const QString &arg1)
 {
     ui->sl_speedFeedFilament->setValue(arg1.toInt());
 }
 //This action set the value of cooler fan to slider and printer
-void ManualControl::on_tb_coolerfan_textChanged(const QString &arg1)
+void ManualControlWidget::on_tb_coolerfan_textChanged(const QString &arg1)
 {
     ui->sl_coolerFan->setValue(arg1.toInt());
 }
 
 /*Heating actions*/
 //This action start heating the bed of the printer
-void ManualControl::on_bt_Bed_clicked(bool checked)
+void ManualControlWidget::on_bt_Bed_clicked(bool checked)
 {
     if(checked==true)
     {       float tmp = ui->tb_BedTempMC->text().toFloat();
@@ -128,7 +129,7 @@ void ManualControl::on_bt_Bed_clicked(bool checked)
     }
 }
 //This action start heating the extruder(s)
-void ManualControl::on_bt_extruderTemp_clicked(bool checked)
+void ManualControlWidget::on_bt_extruderTemp_clicked(bool checked)
 {
     if(checked==true)
     {
@@ -162,7 +163,7 @@ void ManualControl::on_bt_extruderTemp_clicked(bool checked)
     }
 }
 //This function disable some buttons from Manual Control for safety
-void ManualControl::disableAxisButtons()
+void ManualControlWidget::disableAxisButtons()
 {
     ui->bt_home_X->setEnabled(false);
     ui->bt_home_Y->setEnabled(false);
@@ -179,7 +180,7 @@ void ManualControl::disableAxisButtons()
     ui->bt_filamentoTwoSpeed->setEnabled(false);
 }
 //This function enable some buttons from Manual Control
-void ManualControl::enableAxisButtons()
+void ManualControlWidget::enableAxisButtons()
 {
     ui->bt_home_X->setEnabled(true);
     ui->bt_home_Y->setEnabled(true);
@@ -196,7 +197,7 @@ void ManualControl::enableAxisButtons()
     ui->bt_filamentoTwoSpeed->setEnabled(true);
 }
 //This function blocks other buttons for security and ensuring that the slider of extruder temperature is belonging to extruder 1
-void ManualControl::on_bt_extruder1_clicked(bool checked)
+void ManualControlWidget::on_bt_extruder1_clicked(bool checked)
 {
     if(checked==true)
     {
@@ -213,7 +214,7 @@ void ManualControl::on_bt_extruder1_clicked(bool checked)
     }
 }
 //This function blocks other buttons for security and ensuring that the slider of extruder temperature is belonging to extruder 2
-void ManualControl::on_bt_extruder2_clicked(bool checked)
+void ManualControlWidget::on_bt_extruder2_clicked(bool checked)
 {
     if(checked==true)
     {
@@ -230,7 +231,7 @@ void ManualControl::on_bt_extruder2_clicked(bool checked)
     }
 }
 //This function blocks other buttons for security and ensuring that the slider of extruder temperature is belonging to extruder 3
-void ManualControl::on_bt_extruder3_clicked(bool checked)
+void ManualControlWidget::on_bt_extruder3_clicked(bool checked)
 {
     if(checked==true)
     {
@@ -247,7 +248,7 @@ void ManualControl::on_bt_extruder3_clicked(bool checked)
     }
 }
 //This function blocks other buttons for security and ensuring that the slider of extruder temperature is belonging to extruder 4
-void ManualControl::on_bt_extruder4_clicked(bool checked)
+void ManualControlWidget::on_bt_extruder4_clicked(bool checked)
 {
     if(checked==true)
     {
@@ -264,24 +265,24 @@ void ManualControl::on_bt_extruder4_clicked(bool checked)
     }
 }
 //This Action update the temperature of the bed if the print job is on
-void ManualControl::on_tb_BedTempMC_textEdited(const QString &arg1)
+void ManualControlWidget::on_tb_BedTempMC_textEdited(const QString &arg1)
 {   if(ui->bt_play->isChecked() && ui->bt_Bed->isChecked())
         this->printer_object->setBedTemp(arg1.toInt());
 }
 //This Action update the temperature of the extruders if the print job is on
-void ManualControl::on_tb_ExtruderTempMC_textEdited(const QString &arg1)
+void ManualControlWidget::on_tb_ExtruderTempMC_textEdited(const QString &arg1)
 {   if(ui->bt_play->isChecked() && ui->bt_extruderTemp->isChecked() )
     for(int i=1;i<=extrudersInUse;i++)
         this->printer_object->setExtrTemp(i-1,arg1.toInt());
 }
 //This Action set the X axis to new position on right
-void ManualControl::on_bt_right_X_clicked()
+void ManualControlWidget::on_bt_right_X_clicked()
 {   double pos = this->printer_object->getCurrentXPos();
     pos+=ui->cb_valuePosXY->currentText().toFloat();
     this->printer_object->moveAxisToPos('X',pos);
 }
 //This Action set the X axis to new position on left
-void ManualControl::on_bt_left_X_clicked()
+void ManualControlWidget::on_bt_left_X_clicked()
 {   QMessageBox msg;
     msg.setText("Invalid Position!");
     msg.setIcon(QMessageBox::Warning);
@@ -293,14 +294,14 @@ void ManualControl::on_bt_left_X_clicked()
         this->printer_object->moveAxisToPos('X',pos);
 }
 //This Action set the Y axis to new position on up
-void ManualControl::on_bt_up_Y_clicked()
+void ManualControlWidget::on_bt_up_Y_clicked()
 {
     double pos = this->printer_object->getCurrentYPos();
     pos+=ui->cb_valuePosXY->currentText().toFloat();
     this->printer_object->moveAxisToPos('Y',pos);
 }
 //This Action set the Y axis to new position on down
-void ManualControl::on_bt_down_Y_clicked()
+void ManualControlWidget::on_bt_down_Y_clicked()
 {   QMessageBox msg;
     msg.setText("Invalid Position!");
     msg.setIcon(QMessageBox::Warning);
@@ -313,7 +314,7 @@ void ManualControl::on_bt_down_Y_clicked()
 
 }
 //This Action set the Z axis to new position on up
-void ManualControl::on_bt_up_Z_clicked()
+void ManualControlWidget::on_bt_up_Z_clicked()
 {
     double pos = this->printer_object->getCurrentZPos();
     pos+=ui->cb_valuePosXY->currentText().toFloat();
@@ -321,7 +322,7 @@ void ManualControl::on_bt_up_Z_clicked()
 
 }
 //This Action set the Z axis to new position on down
-void ManualControl::on_bt_down_Z_clicked()
+void ManualControlWidget::on_bt_down_Z_clicked()
 {   QMessageBox msg;
     msg.setText("Invalid Position!");
     msg.setIcon(QMessageBox::Warning);
@@ -332,11 +333,11 @@ void ManualControl::on_bt_down_Z_clicked()
     else
         this->printer_object->moveAxisToPos('Z',pos);
 }
-void ManualControl::getPrinterObject(Repetier *printer_object)
+void ManualControlWidget::getPrinterObject(Repetier *printer_object)
 {
     this->printer_object = printer_object;
 }
-void ManualControl::setInitialMarks()
+void ManualControlWidget::setInitialMarks()
 {
     this->qntExtruders = this->printer_object->getNoOfExtruders();
 
@@ -367,7 +368,7 @@ void ManualControl::setInitialMarks()
 }
 
 //This slot update on UI the value of Temperatures of the Bed and Extruders
-void ManualControl::updateTemp(double *temp_Extruders, double tempBed)
+void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
 {   //This function update the printer temperatures on the screen
     float temp_Bed = tempBed;
     //Change bed temperatures
@@ -475,7 +476,7 @@ void ManualControl::updateTemp(double *temp_Extruders, double tempBed)
 }
 }
 //This slot update on UI the position of the Extruder
-void ManualControl::updatePos(double posX, double posY, double posZ)
+void ManualControlWidget::updatePos(double posX, double posY, double posZ)
 {   //This function update the extruder position on the screen
     char resp[51];
     sprintf(resp, "%.3lf", posX);
@@ -489,7 +490,7 @@ void ManualControl::updatePos(double posX, double posY, double posZ)
     ui->tb_posicaoeixoZ->setText(zz);
 
 }
-void ManualControl::stopThreadRoutine()
+void ManualControlWidget::stopThreadRoutine()
 {
     this->temp->setLoop(true);
     this->temp->wait(2000);
@@ -497,16 +498,54 @@ void ManualControl::stopThreadRoutine()
     this->temp->~ThreadRoutine();
 }
 
-void ManualControl::setBedStatus(bool b)
+void ManualControlWidget::setBedStatus(bool b)
 {
     ui->bt_Bed->setChecked(b);
     if(b==false)
         ui->bt_Bed->setStyleSheet("");
 
 }
-void ManualControl::setExtruderStatus(bool b)
+void ManualControlWidget::setExtruderStatus(bool b)
 {
     ui->bt_extruderTemp->setChecked(b);
     if(b==false)
         ui->bt_extruderTemp->setStyleSheet("");
+}
+void ManualControlWidget::hideExtruders(int e)
+{
+    switch (e)
+    {
+    case 1:
+    {   ui->bt_extruder2->hide();
+        ui->lb_extruderTemp_2->hide();
+        ui->lbC2->hide();
+
+        ui->bt_extruder3->hide();
+        ui->lb_extruderTemp_3->hide();
+        ui->lbC3->hide();
+
+        ui->bt_extruder4->hide();
+        ui->lb_extruderTemp_4->hide();
+        ui->lbC4->hide();
+    }break;
+    case 2:
+    {   ui->bt_extruder3->hide();
+        ui->lb_extruderTemp_3->hide();
+        ui->lbC3->hide();
+
+        ui->bt_extruder4->hide();
+        ui->lb_extruderTemp_4->hide();
+        ui->lbC4->hide();
+
+    }break;
+    case 3:
+    {
+        ui->bt_extruder4->hide();
+        ui->lb_extruderTemp_4->hide();
+        ui->lbC4->hide();
+    }break;
+
+    default:
+        break;
+    }
 }

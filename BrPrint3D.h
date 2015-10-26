@@ -12,9 +12,8 @@
 #include "KI/Repetier.h"
 #include "threadRotine.h"
 #include "arduinolistener.h"
-#include "control3d.h"
-#include "manualcontrol.h"
-#include "printerconfigs.h"
+#include "ManualControlWidget.h"
+#include "PrinterSettingsWidget.h"
 
 #include <stdlib.h>
 #include <iostream>

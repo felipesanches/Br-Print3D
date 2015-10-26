@@ -1,25 +1,24 @@
-#ifndef MANUALCONTROL_H
-#define MANUALCONTROL_H
+#ifndef MANUALCONTROLWIDGET_H
+#define MANUALCONTROLWIDGET_H
 
 #include <QWidget>
-#include <brprint3d.h>
+#include <KI/Repetier.h>
 #include <threadRotine.h>
 
 namespace Ui {
-class ManualControl;
+class ManualControlWidget;
 }
 
-class ManualControl : public QWidget
+class ManualControlWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ManualControl(QWidget *parent = 0);
-    ~ManualControl();
-    void init;
+    explicit ManualControlWidget(QWidget *parent = 0);
+    ~ManualControlWidget();
 
 private:
-    Ui::ManualControl *ui;
+    Ui::ManualControlWidget *ui;
     void disableAxisButtons();
     void enableAxisButtons();
     Repetier *printer_object;
@@ -59,7 +58,7 @@ private slots:
 
     void updateTemp(double *temp_Extruders, double tempTable);
     void updateExt(double posX, double posY, double posZ);
-
+    void hideExtruders(int e);
 };
 
-#endif // MANUALCONTROL_H
+#endif // MANUALCONTROLWIDGET_H

@@ -1,4 +1,4 @@
-#include "brprint3d.h"
+#include "BrPrint3D.h"
 #include "ui_Pandora.h"
 
 
@@ -200,6 +200,8 @@ void BrPrint3D::init()
     this->ard_List->start();
     QStringList ports;
     ui->cb_Connection_Port->addItems(ports);
+
+    connect(ui->gb_PrinterConfigs,SIGNAL(hideExtruders(int),ui->tb_ManualControl,SLOT(hideExtruders(int)));
 }
 /*-----------Actions of MenuBar----------*/
 //This Action Close the program - Necessary???

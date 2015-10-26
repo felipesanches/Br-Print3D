@@ -316,7 +316,7 @@
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
-    <widget class="PrinterConfigs" name="gb_PrinterConfigs">
+    <widget class="PrinterSettingsWidget" name="gb_PrinterConfigs">
      <property name="minimumSize">
       <size>
        <width>380</width>
@@ -334,7 +334,7 @@
      </property>
     </widget>
     <widget class="GLWidget" name="openGLWidget"/>
-    <widget class="ManualControl" name="tb_ManualControl">
+    <widget class="ManualControlWidget" name="tb_ManualControl">
      <property name="minimumSize">
       <size>
        <width>425</width>
@@ -561,21 +561,21 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>PrinterConfigs</class>
-   <extends>QGroupBox</extends>
-   <header>printerconfigs.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ManualControl</class>
-   <extends>QTabWidget</extends>
-   <header>manualcontrol.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>GLWidget</class>
    <extends>QOpenGLWidget</extends>
    <header>glwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ManualControlWidget</class>
+   <extends>QTabWidget</extends>
+   <header>ManualControlWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PrinterSettingsWidget</class>
+   <extends>QGroupBox</extends>
+   <header>PrinterSettingsWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

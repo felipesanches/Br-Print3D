@@ -1,4 +1,4 @@
-#include "brprint3d.h"
+#include "BrPrint3D.h"
 #include <QApplication>
 #include <Windows/loading.h>
 #include <QTranslator>

@@ -14,7 +14,6 @@ TRANSLATIONS = EN_english.ts \
                PT_portuguese.ts\
 
 SOURCES += main.cpp\
-        brprint3d.cpp \
     glwidget.cpp \
     points.cpp \
     KI/Arduino_Serial.cpp \
@@ -29,10 +28,12 @@ SOURCES += main.cpp\
     Windows/loading.cpp \
     Windows/warning.cpp \
     arduinolistener.cpp \
-    printerconfigs.cpp \
-    manualcontrol.cpp
+    BrPrint3D.cpp \
+    PrinterSettings.cpp \
+    PrinterSettingsWidget.cpp \
+    ManualControlWidget.cpp
 
-HEADERS  += brprint3d.h \
+HEADERS  += \
     glwidget.h \
     points.h \
     KI/Arduino_Serial.h \
@@ -47,8 +48,11 @@ HEADERS  += brprint3d.h \
     Windows/loading.h \
     Windows/warning.h \
     arduinolistener.h \
-    printerconfigs.h \
-    manualcontrol.h
+    BrPrint \#D
+    BrPrint3D.h \
+    PrinterSettings.h \
+    PrinterSettingsWidget.h \
+    ManualControlWidget.h
 
 FORMS    += \
     Pandora.ui \
@@ -58,9 +62,9 @@ FORMS    += \
     Windows/legalwarning.ui \
     Windows/loading.ui \
     Windows/warning.ui \
-    printerconfigs.ui \
-    manualcontrol.ui \
-    3dwidget.ui
+    3dwidget.ui \
+    PrinterSettingsWidget.ui \
+    ManualControlWidget.ui
 
 RESOURCES += \
     images.qrc \

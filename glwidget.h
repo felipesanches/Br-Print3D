@@ -1,7 +1,7 @@
 #ifndef GLWIDGET
 #define GLWIDGET
 #endif // GLWIDGET
-#include "brprint3d.h"
+#include "BrPrint3D.h"
 #include "points.h"
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>

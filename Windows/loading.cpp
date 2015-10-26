@@ -1,6 +1,6 @@
 #include "loading.h"
 #include "ui_loading.h"
-#include "brprint3d.h"
+#include "BrPrint3D.h"
 
 Loading::Loading(QWidget *parent) :
     QDialog(parent), ui(new Ui::Loading)
