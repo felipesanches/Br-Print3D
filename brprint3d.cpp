@@ -484,6 +484,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
              ui->bt_connect->setChecked(false);
              return;
         }
+        //EH POR AQUI QUE COMEÇA MINHA CONFUSAO
         if(ui->ck_resetonConnect->isChecked()==true)
              this->resetWhenConnect = true;
         else
@@ -519,7 +520,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             msg.setText(e);
             msg.setIcon(QMessageBox::Warning);
             msg.exec();
-            ui->Manual_Control->setEnabled(false);
+            ui->tb_ManualControl->setEnabled(false);
             ui->bt_connect->setChecked(false);
         }
 
@@ -532,18 +533,16 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
        {
            this->printer_object->setExtrTemp(i,0);
        }
-
+       //Stop and Kill the thread
        ui->tb_ManualControl->stopThreadRoutine();
+       //Kill the object
        this->printer_object->~Repetier();
-       //Check Bed to false
-       ui->bt_Bed->setChecked(false);
-       ui->bt_Bed->setStyleSheet("");
-      //Check extruder to false
-       ui->bt_extruderTemp->setChecked(false);
-       ui->bt_extruderTemp->setStyleSheet("");
-
-
-       ui->Manual_Control->setDisabled(true);
+       //Off Bed
+       ui->tb_ManualControl->setBedStatus(false);
+       //Off Extruder
+       ui->tb_ManualControl->setExtruderStatus(false);
+       //Disable the ManualControl
+       ui->tb_ManualControl->setDisabled(true);
      }
 }
 

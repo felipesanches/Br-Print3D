@@ -26,6 +26,8 @@ private:
     ThreadRoutine *temp=NULL;
     int qntExtruders;
     void stopThreadRoutine();
+    void setBedStatus(bool b);
+    void setExtruderStatus(bool b);
 
 private slots:
     void on_bt_extruder1_clicked(bool checked);

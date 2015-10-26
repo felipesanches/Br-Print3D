@@ -496,3 +496,17 @@ void ManualControl::stopThreadRoutine()
     this->temp->quit();
     this->temp->~ThreadRoutine();
 }
+
+void ManualControl::setBedStatus(bool b)
+{
+    ui->bt_Bed->setChecked(b);
+    if(b==false)
+        ui->bt_Bed->setStyleSheet("");
+
+}
+void ManualControl::setExtruderStatus(bool b)
+{
+    ui->bt_extruderTemp->setChecked(b);
+    if(b==false)
+        ui->bt_extruderTemp->setStyleSheet("");
+}
