@@ -13,7 +13,7 @@ PrinterConfigs::~PrinterConfigs()
     delete ui;
 }
 
-PrinterConfigs::init(QSettings settings)
+void PrinterConfigs::init(QSettings settings)
 {
     //Load the previous configs if them exists
     QStringList groups;

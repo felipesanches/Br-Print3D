@@ -15,9 +15,11 @@ class PrinterConfigs : public QWidget
 public:
     explicit PrinterConfigs(QWidget *parent = 0);
     ~PrinterConfigs();
+   void init(QSettings settings);
 
 private:
     Ui::PrinterConfigs *ui;
+
 };
 
 #endif // PRINTERCONFIGS_H
