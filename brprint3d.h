@@ -52,20 +52,8 @@ public:
 
 private slots:
     void locate_Arduino(bool b);
-    void on_bt_hide_clicked();
-    void on_actionPortuguese_triggered();
-    void on_actionFechar_triggered();
-    void on_actionAviso_Legal_triggered();
-    void on_actionDocumenta_o_triggered();
-    void on_actionAjuda_triggered();
-    void on_actionSobre_o_BrPrint3D_triggered();
-    void on_bt_home_X_clicked();
-    void on_bt_home_Y_clicked();
-    void on_bt_home_Z_clicked();
-    void on_bt_home_XYZ_clicked();
-    void on_bt_startSlicer_clicked();
-    void on_bt_killSlicer_clicked();
-    void on_bt_extruderTemp_clicked(bool checked);
+    //void on_bt_hide_clicked();
+
     void on_bt_import_clicked();
     void on_bt_open_clicked();
     void on_bt_connect_clicked(bool checked);
@@ -73,33 +61,13 @@ private slots:
     void on_bt_pause_clicked(bool checked);
     void on_bt_stop_clicked();
     void on_bt_emergency_clicked();
-    void on_bt_addSlicer_clicked();
+
     void updateTemp(double *temp_Extruders, double tempTable);
     void updateExt(double posX, double posY, double posZ);
 
     void isPrintJobRunning(bool b);
-    void on_bt_filamentoRetract_clicked();
-    void on_bt_filamentoOneSpeed_clicked();
-    void on_bt_filamentoTwoSpeed_clicked();
 
 
-    void on_actionEnglish_triggered();
-    void on_bt_extruder1_clicked(bool checked);
-    void on_bt_extruder2_clicked(bool checked);
-    void on_bt_extruder3_clicked(bool checked);
-    void on_bt_extruder4_clicked(bool checked);
-    void on_tb_filamentFlow_textChanged(const QString &arg1);
-    void on_tb_speedFeedFilament_textChanged(const QString &arg1);
-    void on_tb_coolerfan_textChanged(const QString &arg1);
-    void on_bt_Bed_clicked(bool checked);
-    void on_tb_BedTempMC_textEdited(const QString &arg1);
-    void on_tb_ExtruderTempMC_textEdited(const QString &arg1);
-    void on_bt_up_Y_clicked();
-    void on_bt_left_X_clicked();
-    void on_bt_down_Y_clicked();
-    void on_bt_right_X_clicked();
-    void on_bt_up_Z_clicked();
-    void on_bt_down_Z_clicked();
 
 private:
 
@@ -127,8 +95,6 @@ private:
 
     bool garbage; //Garbage - variable unused
 
-    void disableAxisButtons();
-    void enableAxisButtons();
 
     void locate_Slicer();
     void locate_Cura();

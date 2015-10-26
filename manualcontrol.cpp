@@ -12,6 +12,18 @@ ManualControl::~ManualControl()
 {
     delete ui;
 }
+void ManualControl::init()
+{
+    ui->GCodePreview->setPlainText(tr("No Open File."));
+
+    //Set Values on labels of Manual Control
+    ui->lb_value_cooler->setText(QVariant (ui->sl_coolerFan->value()).toString());
+    ui->lb_bedTemp->setText(QVariant (ui->sl_bed->value()).toString());
+    ui->lb_value_speedfil->setText(QVariant (ui->sl_speedFeedFilament->value()).toString());
+    ui->lb_value_vazaofil->setText(QVariant (ui->sl_filamentFlow->value()).toString());
+    ui->lb_extruderTemp_0->setText(QVariant (ui->sl_extruder->value()).toString());
+
+}
 
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
 void ManualControl::on_bt_addSlicer_clicked()

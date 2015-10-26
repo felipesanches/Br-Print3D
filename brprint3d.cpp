@@ -165,14 +165,6 @@ void BrPrint3D::init()
     //Call init Printer Configs
     ui->gb_PrinterConfigs->init(&settings);
 
-    ui->GCodePreview->setPlainText(tr("No Open File."));
-
-    //Set Values on labels of Manual Control
-    ui->lb_value_cooler->setText(QVariant (ui->sl_coolerFan->value()).toString());
-    ui->lb_bedTemp->setText(QVariant (ui->sl_bed->value()).toString());
-    ui->lb_value_speedfil->setText(QVariant (ui->sl_speedFeedFilament->value()).toString());
-    ui->lb_value_vazaofil->setText(QVariant (ui->sl_filamentFlow->value()).toString());
-    ui->lb_extruderTemp_0->setText(QVariant (ui->sl_extruder->value()).toString());
 
     //Hide Config Menu
     ui->Menu_Control_Left->hide();
