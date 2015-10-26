@@ -170,25 +170,24 @@ void BrPrint3D::init()
 
 
     //Hide Config Menu
-    ui->Menu_Control_Left->hide();
+    ui->gb_PrinterConfigs->hide();
     ui->openGLWidget->setGeometry(20,160,900,510);
 
     //Disable Play Button
     ui->bt_play->setEnabled(false);
 
     //Disable Manual Control of Printer
-    ui->tb_ManualControl->find(2)->setDisabled(true);
     ui->tb_ManualControl->widget(2)->setEnabled(false);
     //Disable Slicer Tab - Because is not done
-    ui->Slicer->setEnabled(false);
+    QTabWidget *t = ui->tb_ManualControl->widget(1);
+    t->widget(2)->setEnabled(false);
+
 
     //Start the thread that is listening if Arduino is connect or not
     this->ard_List = new arduinoListener;
     connect(ard_List,SIGNAL(arduinoConnect(bool)),this,SLOT(locate_Arduino(bool)));
     this->ard_List->start();
-    QStringList ports;
-    ui->cb_Connection_Port->addItems(ports);
-
+    //Connect a signal to hide extruders if change on qnt of extruders
     connect(ui->gb_PrinterConfigs,SIGNAL(hideExtruders(int),ui->tb_ManualControl,SLOT(hideExtruders(int)));
 }
 /*-----------Actions of MenuBar----------*/
@@ -242,86 +241,22 @@ void BrPrint3D::on_actionSobre_o_BrPrint3D_triggered()
 
 /*----------Actions---------------------*/
 //This action Hide/Show The Configuration of Printer
-void BrPrint3D::on_bt_hide_clicked()
+void BrPrint3D::on_bt_Hide_clicked()
 {
-    if(ui->bt_hide->text()==tr("Configuration - Show"))
+    if(ui->bt_Hide->text()==tr("Configuration - Show"))
     {
-        ui->bt_hide->setText(tr("Configuration - Hide"));
-        ui->Menu_Control_Left->show();
-        ui->openGLWidget->setGeometry(460,160,480,510);
+        ui->bt_Hide->setText(tr("Configuration - Hide"));
+        ui->gb_PrinterConfigs->show();
+       // ui->openGLWidget->setGeometry(460,160,480,510);
     }
     else
     {
-        ui->bt_hide->setText(tr("Configuration - Show"));
-        ui->Menu_Control_Left->hide();
-        ui->openGLWidget->setGeometry(20,160,900,510);
+        ui->bt_Hide->setText(tr("Configuration - Show"));
+        ui->gb_PrinterConfigs->hide();
+       // ui->openGLWidget->setGeometry(20,160,900,510);
     }
 }
-//This function locate the Sli3er program and save on Ini file
-void BrPrint3D::locate_Slicer()
-{   QMessageBox msg;
-    garbage=std::system("whereis slic3r > slic3r.txt");
-    std::ifstream slicer("slic3r.txt");
-    char path[201];
-    if(!slicer)
-    {
-        msg.setText("Bin Slic3r could not be open!");
-        msg.exec();
-    }
-    else
-    {   if(!slicer.eof())
-        {   slicer.getline(path,sizeof(path));//Lê a linha do arquivo
-            if(path[7]=='\0')
-            {
-               msg.setText("Slic3r not found! To search click on add Slicer on tab Slicer!");
-               ui->cb_Slicer->addItem("Slic3er (Not Found)");
-               //msg.exec();
-            }
-            else
-            {   for(int i=8;path[i]!=' ';i++)
-                {
-                    pathslicer+=path[i];
-                }
-                ui->cb_Slicer->addItem("Slic3r");
-                settings.setValue("slic3r",pathslicer);//Save the path on ini file
-                settings.sync();//Atualiza ini
-            }
-        }
-    }
-}
-//This function locate the Cura program and save on Ini file
-void BrPrint3D::locate_Cura()
-{   QMessageBox msg;
-    garbage=std::system("whereis cura > cura.txt");
-    std::ifstream cura("cura.txt");
-    char path[201];
-    if(!cura)
-    {
-        msg.setText("Bin Cura could not be open!");
-        msg.exec();
-    }
-    else
-    {
-        if(!cura.eof())
-        {
-            cura.getline(path,sizeof(path));//read line of the file
-            if(path[5]=='\0')
-            {
-                ui->cb_Slicer->addItem("Cura Engine (Not Found)");
-            }
-            else
-            {
-                for(int j=6;path[j]!=' ';j++)
-                {
-                    pathcura+=path[j];
-                }
-               ui->cb_Slicer->addItem("Cura Engine");
-               settings.setValue("cura",pathcura);
-               settings.sync();
-            }
-        }
-    }
-}
+
 //This function locate the port that the arduino is connect
 void BrPrint3D::locate_Arduino(bool b)
 {   this->ard_List->wait(2000);

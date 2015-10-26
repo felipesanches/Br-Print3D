@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>390</width>
-    <height>550</height>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
       <x>0</x>
       <y>10</y>
       <width>374</width>
-      <height>524</height>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -54,13 +54,6 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QPushButton" name="bt_Hide">
-           <property name="text">
-            <string>Configuration - Show</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="bt_SaveConfig">
            <property name="text">
             <string>Save</string>
@@ -77,19 +70,6 @@
         </layout>
        </item>
       </layout>
-     </item>
-     <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item>
       <widget class="QTabWidget" name="Config">
@@ -289,34 +269,12 @@
          <item row="7" column="1" colspan="2">
           <widget class="QLineEdit" name="tb_AreaPrintY"/>
          </item>
-         <item row="6" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_AreaPrintX"/>
-         </item>
-         <item row="1" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_FeedZ"/>
-         </item>
          <item row="8" column="0">
           <widget class="QLabel" name="lb_areaz">
            <property name="text">
             <string>Print Area - Vertical(mm)(Z):</string>
            </property>
           </widget>
-         </item>
-         <item row="8" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_AreaPrintZ"/>
-         </item>
-         <item row="3" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_RetractionSpeed"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="lb_ExtruderV">
-           <property name="text">
-            <string>Extruder Speed(mm/s):</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_ExtTemperature"/>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="lg_Velocity_R">
@@ -325,10 +283,10 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="lb_Extruder_Temper">
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_ExtruderV">
            <property name="text">
-            <string>Extruder Temperature(ºC):</string>
+            <string>Extruder Speed(mm/s):</string>
            </property>
           </widget>
          </item>
@@ -336,6 +294,41 @@
           <widget class="QLabel" name="lb_areax">
            <property name="text">
             <string>Print Area - Width(mm)(X):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_RateMoviment"/>
+         </item>
+         <item row="8" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_AreaPrintZ"/>
+         </item>
+         <item row="6" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_AreaPrintX"/>
+         </item>
+         <item row="1" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_FeedZ"/>
+         </item>
+         <item row="4" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_ExtTemperature"/>
+         </item>
+         <item row="3" column="1" colspan="2">
+          <widget class="QLineEdit" name="tb_RetractionSpeed"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_RateMoviment">
+           <property name="text">
+            <string>Moviment Rate(mm/min):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="tb_ExtSpeedmm"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lb_Feed_Z">
+           <property name="text">
+            <string>Feed Z Axis(mm/min):</string>
            </property>
           </widget>
          </item>
@@ -353,31 +346,31 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lb_Feed_Z">
-           <property name="text">
-            <string>Feed Z Axis(mm/min):</string>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="2">
           <widget class="QLineEdit" name="tb_ExtSpeedSec"/>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="tb_ExtSpeedmm"/>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="lb_RateMoviment">
-           <property name="text">
-            <string>Moviment Rate(mm/min):</string>
-           </property>
-          </widget>
          </item>
          <item row="5" column="1" colspan="2">
           <widget class="QLineEdit" name="tb_BedTemp"/>
          </item>
-         <item row="0" column="1" colspan="2">
-          <widget class="QLineEdit" name="tb_RateMoviment"/>
+         <item row="4" column="0">
+          <widget class="QLabel" name="lb_Extruder_Temper">
+           <property name="text">
+            <string>Extruder Temperature(ºC):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>

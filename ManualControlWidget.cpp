@@ -566,4 +566,68 @@ void ManualControlWidget::hideExtruders(int e)
     }
 }
 
-
+//This function locate the Sli3er program and save on Ini file
+void ManualControlWidget::locate_Slicer()
+{   QMessageBox msg;
+    garbage=std::system("whereis slic3r > slic3r.txt");
+    std::ifstream slicer("slic3r.txt");
+    char path[201];
+    if(!slicer)
+    {
+        msg.setText("Bin Slic3r could not be open!");
+        msg.exec();
+    }
+    else
+    {   if(!slicer.eof())
+        {   slicer.getline(path,sizeof(path));//Lê a linha do arquivo
+            if(path[7]=='\0')
+            {
+               msg.setText("Slic3r not found! To search click on add Slicer on tab Slicer!");
+               ui->cb_Slicer->addItem("Slic3er (Not Found)");
+               //msg.exec();
+            }
+            else
+            {   for(int i=8;path[i]!=' ';i++)
+                {
+                    pathslicer+=path[i];
+                }
+                ui->cb_Slicer->addItem("Slic3r");
+                settings.setValue("slic3r",pathslicer);//Save the path on ini file
+                settings.sync();//Atualiza ini
+            }
+        }
+    }
+}
+//This function locate the Cura program and save on Ini file
+void ManualControlWidget::locate_Cura()
+{   QMessageBox msg;
+    garbage=std::system("whereis cura > cura.txt");
+    std::ifstream cura("cura.txt");
+    char path[201];
+    if(!cura)
+    {
+        msg.setText("Bin Cura could not be open!");
+        msg.exec();
+    }
+    else
+    {
+        if(!cura.eof())
+        {
+            cura.getline(path,sizeof(path));//read line of the file
+            if(path[5]=='\0')
+            {
+                ui->cb_Slicer->addItem("Cura Engine (Not Found)");
+            }
+            else
+            {
+                for(int j=6;path[j]!=' ';j++)
+                {
+                    pathcura+=path[j];
+                }
+               ui->cb_Slicer->addItem("Cura Engine");
+               settings.setValue("cura",pathcura);
+               settings.sync();
+            }
+        }
+    }
+}

@@ -29,6 +29,8 @@ private:
     void setBedStatus(bool b);
     void setExtruderStatus(bool b);
     QString pathslicer,pathcura;
+    void locateSlicer();
+    void locateCura();
 
 private slots:
     void on_bt_extruder1_clicked(bool checked);
