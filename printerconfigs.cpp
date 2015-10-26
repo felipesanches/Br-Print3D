@@ -56,8 +56,8 @@ void PrinterConfigs::init(QSettings *settings)
     }
 
 }
-
-void PrinterConfigs::on_bt_saveConfig_clicked() //Salva as configurações de impressoras
+//This action save the configs insert by the user on Printer Configs in Ini File
+void PrinterConfigs::on_bt_saveConfig_clicked() //Save actual configs
 {   bool ok;
     QString name = QInputDialog::getText(this, tr("Insert the name of config: "),tr("Name:"),QLineEdit::Normal,"ex.: Graber1",&ok);
     this->settings.beginGroup("Printer_Configs");
@@ -97,3 +97,45 @@ void PrinterConfigs::on_bt_saveConfig_clicked() //Salva as configurações de im
     ui->cb_printer->clear();
     ui->cb_printer->addItems(groups);
 }
+
+void PrinterConfigs::loadConfigs(QString q)
+{
+        settings.beginGroup("Printer_Configs");
+        settings.beginGroup(q);
+        //Connection
+        this->connectionType = settings.value("ConnectionType","USB").toString();
+        this->transmissionRate = settings.value("TransmissionRate","115200").toString();
+        this->firmwareType = settings.value("Firmware","Repetier").toString();
+        this->cacheSize = settings.value("CacheSize","127").toString();
+        this->resetOnConnect = settings.value("ResetOnConnect",2).toInt();
+        this->resetOnEmergency = settings.value("ResetonEmergency",0).toInt();
+        this->printLog = settings.value("PrinterLog",0).toInt();
+
+        //Printer
+        this->rateMoviment = settings.value("RateMoviment",0).toString();
+        this->feedZ = settings.value("FeedZ",0).toString();
+        this->extruderSpeed = settings.value("ExtruderSpeed",0).toString();
+        this->extruderRetraction = settings.value("ExtruderRetraction",0).toString();
+        this->extruderTemperature = settings.value("ExtruderTemperature",210).toString();
+        this->bedTemperature = settings.value("BedTemperature",110).toString();
+        this->areaX = settings.value("AreaX",0).toString();
+        this->areaY = settings.value("AreaY",0).toString();
+        this->areaZ = settings.value("AreaZ",0).toString();
+
+        //Extruder
+        this->extruderQnt = settings.value("ExtruderQnt",1).toString();
+        this->extruderMAXTemp = settings.value("ExtruderMaxTemp",230).toString();
+        this->bedMAXTemp = settings.value("BedMaxTemp",120).toString();
+        this->extruderMAXVol = settings.value("VolumeMax",0).toString();
+        settings.endGroup();
+        settings.endGroup();
+
+}
+//This actions loads the config choose by the user on Printer Configs
+void PrinterConfigs::on_cb_printer_currentTextChanged(const QString &arg1)
+{
+    loadConfigs(arg1);
+}
+
+
+

@@ -607,46 +607,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
        ui->Manual_Control->setDisabled(true);
      }
 }
-//This action save the configs insert by the user on Printer Configs in Ini File
 
-//This actions loads the config choose by the user on Printer Configs
-void BrPrint3D::on_cb_printer_currentTextChanged(const QString &arg1)
-{
-    loadConfigs(arg1);
-}
-void BrPrint3D::loadConfigs(QString q)
-{
-        settings.beginGroup("Printer_Configs");
-        settings.beginGroup(q);
-        //Connection
-        this->connectionType = settings.value("ConnectionType","USB").toString();
-        this->transmissionRate = settings.value("TransmissionRate","115200").toString();
-        this->firmwareType = settings.value("Firmware","Repetier").toString();
-        this->cacheSize = settings.value("CacheSize","127").toString();
-        this->resetOnConnect = settings.value("ResetOnConnect",2).toInt();
-        this->resetOnEmergency = settings.value("ResetonEmergency",0).toInt();
-        this->printLog = settings.value("PrinterLog",0).toInt();
-
-        //Printer
-        this->rateMoviment = settings.value("RateMoviment",0).toString();
-        this->feedZ = settings.value("FeedZ",0).toString();
-        this->extruderSpeed = settings.value("ExtruderSpeed",0).toString();
-        this->extruderRetraction = settings.value("ExtruderRetraction",0).toString();
-        this->extruderTemperature = settings.value("ExtruderTemperature",210).toString();
-        this->bedTemperature = settings.value("BedTemperature",110).toString();
-        this->areaX = settings.value("AreaX",0).toString();
-        this->areaY = settings.value("AreaY",0).toString();
-        this->areaZ = settings.value("AreaZ",0).toString();
-
-        //Extruder
-        this->extruderQnt = settings.value("ExtruderQnt",1).toString();
-        this->extruderMAXTemp = settings.value("ExtruderMaxTemp",230).toString();
-        this->bedMAXTemp = settings.value("BedMaxTemp",120).toString();
-        this->extruderMAXVol = settings.value("VolumeMax",0).toString();
-        settings.endGroup();
-        settings.endGroup();
-
-}
 
 /*-----------Printer Actions-----------*/
 //This actions start the printer job

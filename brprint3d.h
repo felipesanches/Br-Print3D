@@ -76,13 +76,13 @@ private slots:
     void on_bt_addSlicer_clicked();
     void updateTemp(double *temp_Extruders, double tempTable);
     void updateExt(double posX, double posY, double posZ);
-    void on_cb_Extruder_qnt_currentTextChanged(const QString &arg1);
+
     void isPrintJobRunning(bool b);
     void on_bt_filamentoRetract_clicked();
     void on_bt_filamentoOneSpeed_clicked();
     void on_bt_filamentoTwoSpeed_clicked();
-    void on_bt_saveConfig_clicked();
-    void on_cb_printer_currentTextChanged(const QString &arg1);
+
+
     void on_actionEnglish_triggered();
     void on_bt_extruder1_clicked(bool checked);
     void on_bt_extruder2_clicked(bool checked);
@@ -129,10 +129,10 @@ private:
 
     void disableAxisButtons();
     void enableAxisButtons();
-    void loadConfigs(QString q);
+
     void locate_Slicer();
     void locate_Cura();
-    void connectSignals();
+
 
 protected:
     void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;

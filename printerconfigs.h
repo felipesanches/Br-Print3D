@@ -15,22 +15,22 @@ class PrinterConfigs : public QWidget
 public:
     explicit PrinterConfigs(QWidget *parent = 0);
     ~PrinterConfigs();
-   void init(QSettings *settings);
+    void init(QSettings *settings);
 
 private:
     Ui::PrinterConfigs *ui;
     QSettings settings;
-    QString extruderTemperature="";         //Temperatura Default Extrusor
-    QString bedTemperature="";            //Temperatura Default Mesa
-    QString extruderMAXTemp="";             //Temperatura Maxima do Extrusor
-    QString bedMAXTemp="";                //Temperatura Maxima da Mesa
-    QString areaX="2";                       //Tamanho da mesa no eixo X
-    QString areaY="2";                       //Tamanho da mesa no eixo Y
-    QString areaZ="2";                       //Tamanho da mesa no eixo Z
-    QString rateMoviment;                        //Taxa de Movimento da Mesa
-    QString extruderSpeed;                       //Velocidade do Extrusor
-    QString extruderRetraction;                  //Velocidade de Retracao do Extrusor
-    QString extruderQnt;              //Quantidade de extrusores
+    QString extruderTemperature="";
+    QString bedTemperature="";
+    QString extruderMAXTemp="";
+    QString bedMAXTemp="";
+    QString areaX="2";
+    QString areaY="2";
+    QString areaZ="2";
+    QString rateMoviment;
+    QString extruderSpeed;
+    QString extruderRetraction;
+    QString extruderQnt;
     QString connectionType;
     QString transmissionRate;
     QString firmwareType;
@@ -39,6 +39,12 @@ private:
     int resetOnConnect, resetOnEmergency, printLog, qntextruders;
     QString feedZ;
     QString extruderMAXVol;
+    //Functions
+    void loadConfigs(QString q);
+
+private slots:
+    void on_cb_printer_currentTextChanged(const QString &arg1);
+    void on_bt_saveConfig_clicked();
 
 };
 
