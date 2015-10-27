@@ -33,6 +33,10 @@ private slots:
     void on_cb_Extruder_qnt_currentTextChanged(const QString &arg1);
 
     void disableExtruderQntCB(bool b);
+    void on_bt_SaveConfig_clicked();
+
+    void on_cb_ExtruderQnt_currentTextChanged(const QString &arg1);
+
 signals:
     void hideExtruders(int e);
     void _extrudersInUse(int e);

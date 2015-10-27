@@ -251,15 +251,15 @@ void BrPrint3D::on_actionAboutBrPrint_triggered()
 //This action Hide/Show The Configuration of Printer
 void BrPrint3D::on_bt_Hide_clicked()
 {
-    if(ui->bt_Hide->text()==tr("Configuration - Show"))
+    if(ui->bt_Hide->text()==tr("Settings - Show"))
     {
-        ui->bt_Hide->setText(tr("Configuration - Hide"));
+        ui->bt_Hide->setText(tr("Settings - Hide"));
         ui->PrinterConfigs->show();
        // ui->openGLWidget->setGeometry(460,160,480,510);
     }
     else
     {
-        ui->bt_Hide->setText(tr("Configuration - Show"));
+        ui->bt_Hide->setText(tr("Settings - Show"));
         ui->PrinterConfigs->hide();
        // ui->openGLWidget->setGeometry(20,160,900,510);
     }

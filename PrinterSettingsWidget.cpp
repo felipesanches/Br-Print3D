@@ -57,7 +57,7 @@ void PrinterSettingsWidget::init(QSettings *settings)
 
 }
 //This action save the configs insert by the user on Printer Configs in Ini File
-void PrinterSettingsWidget::on_bt_saveConfig_clicked() //Save actual configs
+void PrinterSettingsWidget::on_bt_SaveConfig_clicked() //Save actual configs
 {   bool ok;
     QString name = QInputDialog::getText(this, tr("Insert the name of config: "),tr("Name:"),QLineEdit::Normal,"ex.: Graber1",&ok);
     this->settings->beginGroup("Printer_Configs");
@@ -140,11 +140,6 @@ void PrinterSettingsWidget::on_cb_Printer_currentTextChanged(const QString &arg1
 {
     loadConfigs(arg1);
 }
-void PrinterSettingsWidget::on_cb_Extruder_qnt_currentTextChanged(const QString &arg1)
-{   this->extrudersInUse = arg1.toInt();
-    emit hideExtruders(this->extrudersInUse);
-    emit _extrudersInUse(this->extrudersInUse);
-}
 PrinterSettings* PrinterSettingsWidget::getCurrentSettings()
 {
     PrinterSettings *p;
@@ -181,4 +176,12 @@ void PrinterSettingsWidget::setConnectionPort(QStringList p)
 void PrinterSettingsWidget::disableExtruderQntCB(bool b)
 {
     ui->cb_ExtruderQnt->setDisabled(true);
+}
+
+void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &arg1)
+{
+        this->extrudersInUse = arg1.toInt();
+        emit hideExtruders(this->extrudersInUse);
+        emit _extrudersInUse(this->extrudersInUse);
+
 }
