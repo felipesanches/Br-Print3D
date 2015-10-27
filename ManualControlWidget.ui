@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTabWidget" name="SettingsManualControl">
+  <widget class="QTabWidget" name="ManualControl">
    <property name="geometry">
     <rect>
      <x>5</x>
@@ -35,9 +35,9 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
-   <widget class="QWidget" name="GCode_Slicer_Control">
+   <widget class="QWidget" name="GCodeSlicerTab">
     <attribute name="title">
      <string>GCode/Slicer</string>
     </attribute>
@@ -328,7 +328,7 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="Manual_Control">
+   <widget class="QWidget" name="ManualControlTab">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -1500,7 +1500,7 @@ QSlider::handle:horizontal {
     <zorder>lb_extruderTemp_0</zorder>
     <zorder>bt_extruderTemp</zorder>
    </widget>
-   <widget class="QWidget" name="Tool_Box">
+   <widget class="QWidget" name="ToolBoxTab">
     <attribute name="title">
      <string>Toolbox</string>
     </attribute>

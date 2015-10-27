@@ -14,7 +14,8 @@ ManualControlWidget::~ManualControlWidget()
 }
 
 void ManualControlWidget::init()
-{   ui->SettingsManualControl->setEnabled(false);
+{   ui->ManualControlTab->setDisabled(true);
+    ui->Slicer->setDisabled(true);
     ui->GCodePreview->setPlainText(tr("No Open File."));
 
     //Set Values on labels of Manual Control
@@ -649,5 +650,5 @@ void ManualControlWidget::btPlayStatus(bool b)
 }
 void ManualControlWidget::disableManualControlTb(bool b)
 {
-    ui->SettingsManualControl->setDisabled(b);
+    ui->ManualControlTab->setDisabled(b);
 }
