@@ -183,7 +183,8 @@ void BrPrint3D::init()
     //Connect a signal to hide extruders if change on qnt of extruders
     connect(ui->PrinterConfigs,SIGNAL(hideExtruders(int)),ui->ManualControl,SLOT(hideExtruders(int)));
     //Connect a signal to disable the extruderCB on PrinterConfigs
-    connect(ui->ManualControl,SIGNAL(disableExtruderQntCB()),ui->PrinterConfigs,SLOT(disableExtruderQntCB(bool)));
+    connect(ui->ManualControl,SIGNAL(disableExtrudersQntCB()),ui->PrinterConfigs,SLOT(disableExtrudersQntCB(bool)));
+
     connect(ui->PrinterConfigs,SIGNAL(_extrudersInUse(int)),ui->ManualControl,SLOT(_extrudersInUse(int)));
     connect(this,SIGNAL(btPlayStatus(bool)),ui->ManualControl,SLOT(btPlayStatus(bool)));
     connect(this,SIGNAL(disableManualControlTb(bool)),ui->ManualControl,SLOT(disableManualControlTb(bool)));

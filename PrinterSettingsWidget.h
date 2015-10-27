@@ -29,12 +29,8 @@ private:
 
 private slots:
     void on_cb_Printer_currentTextChanged(const QString &arg1);
-    void on_bt_saveConfig_clicked();
-    void on_cb_Extruder_qnt_currentTextChanged(const QString &arg1);
-
-    void disableExtruderQntCB(bool b);
+    void disableExtrudersQntCB(bool b);
     void on_bt_SaveConfig_clicked();
-
     void on_cb_ExtruderQnt_currentTextChanged(const QString &arg1);
 
 signals:
