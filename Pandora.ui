@@ -304,19 +304,32 @@
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="bt_Hide">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>131</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Settings - Show</string>
+    </property>
+   </widget>
    <widget class="QSplitter" name="splitter">
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>139</y>
-      <width>1346</width>
-      <height>531</height>
+      <y>130</y>
+      <width>1351</width>
+      <height>541</height>
      </rect>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
-    <widget class="PrinterSettingsWidget" name="gb_PrinterConfigs">
+    <widget class="PrinterSettingsWidget" name="PrinterConfigs" native="true">
      <property name="minimumSize">
       <size>
        <width>380</width>
@@ -328,49 +341,23 @@
        <width>380</width>
        <height>550</height>
       </size>
-     </property>
-     <property name="title">
-      <string>GroupBox</string>
      </property>
     </widget>
     <widget class="GLWidget" name="openGLWidget"/>
-    <widget class="ManualControlWidget" name="tb_ManualControl">
+    <widget class="ManualControlWidget" name="ManualControl" native="true">
      <property name="minimumSize">
       <size>
-       <width>425</width>
+       <width>440</width>
        <height>550</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>425</width>
+       <width>440</width>
        <height>550</height>
       </size>
      </property>
-     <widget class="QWidget" name="tab">
-      <attribute name="title">
-       <string>Tab 1</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>Tab 2</string>
-      </attribute>
-     </widget>
     </widget>
-   </widget>
-   <widget class="QPushButton" name="bt_Hide">
-    <property name="geometry">
-     <rect>
-      <x>5</x>
-      <y>100</y>
-      <width>166</width>
-      <height>36</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Configuration - Show</string>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -453,15 +440,15 @@
    <header>glwidget.h</header>
   </customwidget>
   <customwidget>
-   <class>ManualControlWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ManualControlWidget.h</header>
+   <class>PrinterSettingsWidget</class>
+   <extends>QWidget</extends>
+   <header>PrinterSettingsWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>PrinterSettingsWidget</class>
-   <extends>QGroupBox</extends>
-   <header>PrinterSettingsWidget.h</header>
+   <class>ManualControlWidget</class>
+   <extends>QWidget</extends>
+   <header>ManualControlWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -62,7 +62,6 @@ FORMS    += \
     Windows/legalwarning.ui \
     Windows/loading.ui \
     Windows/warning.ui \
-    3dwidget.ui \
     PrinterSettingsWidget.ui \
     ManualControlWidget.ui
 

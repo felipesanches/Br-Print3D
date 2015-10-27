@@ -120,6 +120,9 @@ protected:
     void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 signals:
     void setExtrudersQnt(int q);
+    void disableExtrudersQntCB(bool b);
+    void btPlayStatus(bool b);
+    void disableManualControlTb(bool b);
 
 };
 

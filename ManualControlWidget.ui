@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTabWidget" name="ConfiguracoesMenuControlRight">
+  <widget class="QTabWidget" name="SettingsManualControl">
    <property name="geometry">
     <rect>
      <x>5</x>
@@ -29,7 +29,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="GCode_Slicer_Control">
     <attribute name="title">

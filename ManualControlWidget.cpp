@@ -14,7 +14,7 @@ ManualControlWidget::~ManualControlWidget()
 }
 
 void ManualControlWidget::init()
-{
+{   ui->SettingsManualControl->setEnabled(false);
     ui->GCodePreview->setPlainText(tr("No Open File."));
 
     //Set Values on labels of Manual Control
@@ -25,9 +25,9 @@ void ManualControlWidget::init()
     ui->lb_extruderTemp_0->setText(QVariant (ui->sl_extruder->value()).toString());
 
     //If slic3er exists in Ini file, load path, else locate
-    pathslicer=QVariant (settings.value("slic3r")).toString();
+    pathslicer=QVariant (this->settings.value("slic3r")).toString();
     if(pathslicer.isEmpty())
-        locate_Slicer();
+        locateSlicer();
     else
     {   ui->cb_Slicer->addItem("Slic3r");
         ui->bt_addSlicer->setEnabled(false);
@@ -36,12 +36,21 @@ void ManualControlWidget::init()
     //If cura exists in Ini file, load path, else locate
     pathcura=QVariant (settings.value("cura")).toString();
     if(pathcura.isEmpty())
-        locate_Cura();
+        locateCura();
     else
         ui->cb_Slicer->addItem("Cura Engine");
 
 }
+//This action start the job of slicing
+void ManualControlWidget::on_bt_startSlicer_clicked()
+{
 
+}
+//This action kill the job of slicing
+void ManualControlWidget::on_bt_killSlicer_clicked()
+{
+
+}
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
 void ManualControlWidget::on_bt_addSlicer_clicked()
 {
@@ -51,23 +60,7 @@ void ManualControlWidget::on_bt_addSlicer_clicked()
     settings.sync();
     ui->bt_addSlicer->setEnabled(false);
 }
-//This action start the job of slicing
-void ManualControlWidget::on_bt_startSlicer_clicked()
-{
-    if(ui->cb_Slicer->currentText()=="Slic3r")
-    {
 
-    }
-    if(ui->cb_Slicer->currentText()=="Cura Engine")
-    {
-
-    }
-}
-//This action kill the job of slicing
-void ManualControlWidget::on_bt_killSlicer_clicked()
-{
-
-}
 
 /*-----------Printer Actions - Manual Control----*/
 /*Home Extruder Functions*/
@@ -282,12 +275,12 @@ void ManualControlWidget::on_bt_extruder4_clicked(bool checked)
 }
 //This Action update the temperature of the bed if the print job is on
 void ManualControlWidget::on_tb_BedTempMC_textEdited(const QString &arg1)
-{   if(ui->bt_play->isChecked() && ui->bt_Bed->isChecked())
+{   if(playStatus==true && ui->bt_Bed->isChecked())
         this->printer_object->setBedTemp(arg1.toInt());
 }
 //This Action update the temperature of the extruders if the print job is on
 void ManualControlWidget::on_tb_ExtruderTempMC_textEdited(const QString &arg1)
-{   if(ui->bt_play->isChecked() && ui->bt_extruderTemp->isChecked() )
+{   if(playStatus==true && ui->bt_extruderTemp->isChecked() )
     for(int i=1;i<=extrudersInUse;i++)
         this->printer_object->setExtrTemp(i-1,arg1.toInt());
 }
@@ -513,6 +506,14 @@ void ManualControlWidget::stopThreadRoutine()
     this->temp->quit();
     this->temp->~ThreadRoutine();
 }
+void ManualControlWidget::startThreadRoutine()
+{
+     temp = new ThreadRoutine(this->printer_object,&extrudersInUse);
+     this->temp->start();
+     connect(temp,SIGNAL(updateTemp(double*,double)),this,SLOT(updateTemp(double*,double)));
+     connect(temp,SIGNAL(updateExt(double,double,double)),this,SLOT(updateExt(double,double,double)));
+
+}
 
 void ManualControlWidget::setBedStatus(bool b)
 {
@@ -567,7 +568,7 @@ void ManualControlWidget::hideExtruders(int e)
 }
 
 //This function locate the Sli3er program and save on Ini file
-void ManualControlWidget::locate_Slicer()
+void ManualControlWidget::locateSlicer()
 {   QMessageBox msg;
     garbage=std::system("whereis slic3r > slic3r.txt");
     std::ifstream slicer("slic3r.txt");
@@ -599,7 +600,7 @@ void ManualControlWidget::locate_Slicer()
     }
 }
 //This function locate the Cura program and save on Ini file
-void ManualControlWidget::locate_Cura()
+void ManualControlWidget::locateCura()
 {   QMessageBox msg;
     garbage=std::system("whereis cura > cura.txt");
     std::ifstream cura("cura.txt");
@@ -635,4 +636,18 @@ void ManualControlWidget::locate_Cura()
 void ManualControlWidget::setGcodePreview(QString t)
 {
     ui->GCodePreview->setPlainText(t);
+}
+
+
+void ManualControlWidget::_extrudersInUse(int e)
+{
+    this->extrudersInUse = e;
+}
+void ManualControlWidget::btPlayStatus(bool b)
+{
+    playStatus = b;
+}
+void ManualControlWidget::disableManualControlTb(bool b)
+{
+    ui->SettingsManualControl->setDisabled(b);
 }

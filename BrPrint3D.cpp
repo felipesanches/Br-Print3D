@@ -163,32 +163,30 @@ void BrPrint3D::init()
     //l->show();
 
     //Call init Printer Configs
-    ui->gb_PrinterConfigs->init(&settings);
+    ui->PrinterConfigs->init(&settings);
 
     //Call init Manual Control
-    ui->tb_ManualControl->init();
+    ui->ManualControl->init();
 
 
     //Hide Config Menu
-    ui->gb_PrinterConfigs->hide();
+    ui->PrinterConfigs->hide();
     ui->openGLWidget->setGeometry(20,160,900,510);
 
     //Disable Play Button
     ui->bt_play->setEnabled(false);
-
-    //Disable Manual Control of Printer
-    ui->tb_ManualControl->widget(2)->setEnabled(false);
-    //Disable Slicer Tab - Because is not done
-    //QTabWidget *t = ui->tb_ManualControl->widget(1);
-    //t->widget(2)->setEnabled(false);
-
 
     //Start the thread that is listening if Arduino is connect or not
     this->ard_List = new arduinoListener;
     connect(ard_List,SIGNAL(arduinoConnect(bool)),this,SLOT(locate_Arduino(bool)));
     this->ard_List->start();
     //Connect a signal to hide extruders if change on qnt of extruders
-    connect(ui->gb_PrinterConfigs,SIGNAL(hideExtruders(int)),ui->tb_ManualControl,SLOT(hideExtruders(int)));
+    connect(ui->PrinterConfigs,SIGNAL(hideExtruders(int)),ui->ManualControl,SLOT(hideExtruders(int)));
+    //Connect a signal to disable the extruderCB on PrinterConfigs
+    connect(ui->ManualControl,SIGNAL(disableExtruderQntCB()),ui->PrinterConfigs,SLOT(disableExtruderQntCB(bool)));
+    connect(ui->PrinterConfigs,SIGNAL(_extrudersInUse(int)),ui->ManualControl,SLOT(_extrudersInUse(int)));
+    connect(this,SIGNAL(btPlayStatus(bool)),ui->ManualControl,SLOT(btPlayStatus(bool)));
+    connect(this,SIGNAL(disableManualControlTb(bool)),ui->ManualControl,SLOT(disableManualControlTb(bool)));
 }
 /*-----------Actions of MenuBar----------*/
 
@@ -256,13 +254,13 @@ void BrPrint3D::on_bt_Hide_clicked()
     if(ui->bt_Hide->text()==tr("Configuration - Show"))
     {
         ui->bt_Hide->setText(tr("Configuration - Hide"));
-        ui->gb_PrinterConfigs->show();
+        ui->PrinterConfigs->show();
        // ui->openGLWidget->setGeometry(460,160,480,510);
     }
     else
     {
         ui->bt_Hide->setText(tr("Configuration - Show"));
-        ui->gb_PrinterConfigs->hide();
+        ui->PrinterConfigs->hide();
        // ui->openGLWidget->setGeometry(20,160,900,510);
     }
 }
@@ -298,7 +296,7 @@ void BrPrint3D::locate_Arduino(bool b)
         }
     }
     if(!ports.isEmpty())
-    {   ui->gb_PrinterConfigs->setConnectionPort(ports);
+    {   ui->PrinterConfigs->setConnectionPort(ports);
         QMessageBox msg;
         msg.setText("The arduino is connect at new ports then default, please check on Configs Menu to switch ports!");
         msg.setIcon(QMessageBox::Information);
@@ -321,7 +319,7 @@ void BrPrint3D::on_bt_import_clicked()
             QString text = in.readAll();
             readgcode(text);
             gcode.close();
-            ui->tb_ManualControl->setGcodePreview(text);
+            ui->ManualControl->setGcodePreview(text);
             if(ui->bt_connect->isChecked())
                 ui->bt_play->setEnabled(true);
 
@@ -341,7 +339,7 @@ void BrPrint3D::on_bt_open_clicked()
             QString text = in.readAll();
             readgcode(text);
             gcode.close();
-            ui->tb_ManualControl->setGcodePreview(text);
+            ui->ManualControl->setGcodePreview(text);
         }
     }
    /* else if(QFileInfo(filename).completeSuffix()=="STL" ||QFileInfo(filename).completeSuffix()=="stl")
@@ -401,7 +399,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
     int maxX,maxY,maxZ,transmitionRate,bufferSize;
     std::string serialPort;
    if(checked==true)
-   {    this->p = ui->gb_PrinterConfigs->getCurrentSettings();
+   {    this->p = ui->PrinterConfigs->getCurrentSettings();
         if(!p->areaX.isEmpty() && !p->areaY.isEmpty() && !p->areaZ.isEmpty())
         {
             maxX = p->areaX.toInt();
@@ -410,7 +408,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             transmitionRate = p->transmissionRate.toInt();
             serialPort = p->connectionPort.toInt();
             bufferSize = p->cacheSize.toInt();
-            ui->tb_ManualControl->widget(2)->setEnabled(true);
+            emit disableManualControlTb(false);
         }
         else
         {    msg.setText(tr("Make sure you have all the necessary settings for connection!"));
@@ -441,10 +439,12 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             this->qntExtruders = printer_object->getNoOfExtruders();
             emit setExtrudersQnt(this->qntExtruders);
             //Send to manual control the PrinterObjetct to control the 3dprinter
-            ui->tb_ManualControl->getPrinterObject(this->printer_object);
+            ui->ManualControl->getPrinterObject(this->printer_object);
 
            //Enable button for start printing
            ui->bt_play->setEnabled(true);
+           //Start the threadroutine
+           ui->ManualControl->setInitialMarks();
            //Message the user that the connections is successful
            msg.setText(tr("Successful Connection"));
            msg.setIcon(QMessageBox::Information);
@@ -455,13 +455,13 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             msg.setText(e);
             msg.setIcon(QMessageBox::Warning);
             msg.exec();
-            ui->tb_ManualControl->widget(2)->setEnabled(false);
+            emit disableManualControlTb(true);
             ui->bt_connect->setChecked(false);
         }
 
      }//fim if check true
      else
-     {
+     {  //Think? Move this functions to setBedStatus and ExtruderStatus?
        this->printer_object->setBedTemp(0);
        int qnt = this->printer_object->getNoOfExtruders();
        for(int i=0;i<qnt;i++)
@@ -469,15 +469,15 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
            this->printer_object->setExtrTemp(i,0);
        }
        //Stop and Kill the thread
-       ui->tb_ManualControl->stopThreadRoutine();
+       ui->ManualControl->stopThreadRoutine();
        //Kill the object
        this->printer_object->~Repetier();
        //Off Bed
-       ui->tb_ManualControl->setBedStatus(false);
+       ui->ManualControl->setBedStatus(false);
        //Off Extruder
-       ui->tb_ManualControl->setExtruderStatus(false);
+       ui->ManualControl->setExtruderStatus(false);
        //Disable the ManualControl
-       ui->tb_ManualControl->widget(2)->setEnabled(false);
+       emit disableManualControlTb(true);
      }
 }
 
@@ -488,7 +488,7 @@ void BrPrint3D::on_bt_play_clicked()
 {     QMessageBox msg;
      if(!pathGcode.isEmpty())
      {  //destroy the thread
-         ui->tb_ManualControl->stopThreadRoutine();
+         ui->ManualControl->stopThreadRoutine();
          try
          {
             std::string path = pathGcode.toUtf8().constData();
@@ -511,16 +511,14 @@ void BrPrint3D::on_bt_play_clicked()
          msg.setText(tr("Print Job Started"));
          msg.exec();
          //Create a new thread and connect some signals
-        temp = new ThreadRoutine(this->printer_object,&extrudersInUse);
-         this->temp->start();
-
-         connect(temp,SIGNAL(updateTemp(double*,double)),this,SLOT(updateTemp(double*,double)));
-         connect(temp,SIGNAL(updateExt(double,double,double)),this,SLOT(updateExt(double,double,double)));
-         connect(temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
+         ui->ManualControl->startThreadRoutine();
+         //Think??
+         connect(ui->ManualControl->temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
 
          //Disable some buttons - to safety
-         ui->tb_ManualControl->disableAxisButtons();
-         ui->cb_Extruder_qnt->setEnabled(false);
+         ui->ManualControl->disableAxisButtons();
+         emit disableExtrudersQntCB(true);
+         emit btPlayStatus(true);
      }
 }
 //Pensar melhor aqui, por causa do dialog box finalizado/pausado
@@ -529,11 +527,11 @@ void BrPrint3D::on_bt_pause_clicked(bool checked)
 {
     if(checked==true)
     {     this->printer_object->stopPrintJob();
-          disconnect(temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
+          disconnect(ui->ManualControl->temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
     }
     else
     {   this->printer_object->startPrintJob(false);
-        connect(temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
+        connect(ui->ManualControl->temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
     }
 
 }
@@ -559,17 +557,14 @@ void BrPrint3D::on_bt_stop_clicked()
 
     for(int i=0;i<this->extrudersInUse;i++)
         this->printer_object->setExtrTemp(i,0);
-    ui->tb_ManualControl->enableAxisButtons();
+    ui->ManualControl->enableAxisButtons();
 }
 //This action stop print job in emergency case
 void BrPrint3D::on_bt_emergency_clicked()
 {   QMessageBox msg;
     try
     {
-      this->temp->setLoop(true);
-       this->temp->wait(2000);
-       this->temp->quit();
-       this->temp->~ThreadRoutine();
+      ui->ManualControl->stopThreadRoutine();
 
        msg.setText("Emergency Stop Clicked, click on 'Ok' and wait!");
        msg.setIcon(QMessageBox::Critical);
@@ -580,7 +575,7 @@ void BrPrint3D::on_bt_emergency_clicked()
        msg.exec();
        this->printer_object->~Repetier();
        ui->bt_connect->setChecked(false);
-       ui->tb_ManualControl->enableAxisButtons();
+       ui->ManualControl->enableAxisButtons();
 
     }
     catch(std::string exc)
@@ -601,13 +596,13 @@ void BrPrint3D::isPrintJobRunning(bool b)
 {   //This function return if the print job is finalized
     QMessageBox msg;
     if(b==true)
-    {   disconnect(temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
+    {   disconnect(ui->ManualControl->temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
         msg.setText("Print job finish or paused!");
         msg.setIcon(QMessageBox::Information);
         msg.exec();
         if(ui->bt_pause->isChecked()==false)
-        {    enableAxisButtons();
-            ui->cb_Extruder_qnt->setEnabled(true);
+        {    ui->ManualControl->enableAxisButtons();
+            emit disableExtrudersQntCB(false);
         }
     }
 }
@@ -631,6 +626,7 @@ void BrPrint3D::closeEvent(QCloseEvent *event)
             {
                 this->printer_object->stopPrintJob();
                 this->printer_object->closeFile();
+                this->printer_object->~Repetier();
                 event->accept();
             }break;
             default:

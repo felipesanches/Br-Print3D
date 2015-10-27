@@ -1,6 +1,6 @@
 #include "PrinterSettings.h"
 
-PrinterConfigs::PrinterConfigs()
+PrinterSettings::PrinterSettings()
 {
 
 }

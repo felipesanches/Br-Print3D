@@ -5,11 +5,16 @@
 #include <KI/Repetier.h>
 #include <threadRotine.h>
 #include <QTabWidget>
+#include <QSettings>
+#include <QInputDialog>
+#include <QDir>
+#include <QFileDialog>
+#include <QMessageBox>
 namespace Ui {
 class ManualControlWidget;
 }
 
-class ManualControlWidget : public QTabWidget
+class ManualControlWidget : public QWidget
 {
     Q_OBJECT
 
@@ -18,22 +23,25 @@ public:
     ~ManualControlWidget();
     void init();
     void setGcodePreview(QString t);
+    void startThreadRoutine();
     void stopThreadRoutine();
     void setBedStatus(bool b);
     void setExtruderStatus(bool b);
     void getPrinterObject(Repetier *printer_object);
     void disableAxisButtons();
     void enableAxisButtons();
+    void setInitialMarks();
+    ThreadRoutine *temp=NULL;
 
 private:
     Ui::ManualControlWidget *ui;
-
     Repetier *printer_object;
-    ThreadRoutine *temp=NULL;
-    int qntExtruders;
+    int qntExtruders,extrudersInUse;
     QString pathslicer,pathcura;
     void locateSlicer();
     void locateCura();
+    QSettings settings;
+    bool garbage,playStatus;
 
 
 private slots:
@@ -62,11 +70,17 @@ private slots:
     void on_bt_home_XYZ_clicked();
     void on_bt_extruderTemp_clicked(bool checked);
     void on_bt_addSlicer_clicked();
-
-
     void updateTemp(double *temp_Extruders, double tempTable);
-    void updateExt(double posX, double posY, double posZ);
+    void updatePos(double posX, double posY, double posZ);
     void hideExtruders(int e);
+    void on_bt_startSlicer_clicked();
+    void on_bt_killSlicer_clicked();
+    void _extrudersInUse(int e);
+    void btPlayStatus(bool b);
+    void disableManualControlTb(bool b);
+
+signals:
+    void disableExtrudersQntCB();
 };
 
 #endif // MANUALCONTROLWIDGET_H
