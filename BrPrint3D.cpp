@@ -171,7 +171,6 @@ void BrPrint3D::init()
 
     //Hide Config Menu
     ui->PrinterConfigs->hide();
-    ui->openGLWidget->setGeometry(20,160,900,510);
 
     //Disable Play Button
     ui->bt_play->setEnabled(false);
@@ -258,13 +257,11 @@ void BrPrint3D::on_bt_Hide_clicked()
     {
         ui->bt_Hide->setText(tr("Settings - Hide"));
         ui->PrinterConfigs->show();
-       // ui->openGLWidget->setGeometry(460,160,480,510);
     }
     else
     {
         ui->bt_Hide->setText(tr("Settings - Show"));
         ui->PrinterConfigs->hide();
-       // ui->openGLWidget->setGeometry(20,160,900,510);
     }
 }
 
