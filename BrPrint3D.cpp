@@ -159,27 +159,20 @@ void BrPrint3D::init()
 {   Loading *l=new Loading();
     //l->setParent(this,Qt::Window);
     //l->show();
-    //Call init Printer Configs
     ui->PrinterConfigs->init(&settings);
-    //Call init Manual Control
     ui->ManualControl->init();
-    //Hide Config Menu
     ui->PrinterConfigs->hide();
-    //Disable Play Button
     ui->bt_play->setEnabled(false);
+
     //Start the thread that is listening if Arduino is connect or not
     this->ard_List = new arduinoListener;
     connect(ard_List,SIGNAL(arduinoConnect(bool)),this,SLOT(locate_Arduino(bool)));
     this->ard_List->start();
-    //Connect a signal to hide extruders if change on qnt of extruders
+
     connect(ui->PrinterConfigs,SIGNAL(hideExtruders(int)),ui->ManualControl,SLOT(hideExtruders(int)));
-    //Connect a signal to disable the extruderCB on PrinterConfigs
     connect(ui->ManualControl,SIGNAL(disableExtrudersQntCB(bool)),ui->PrinterConfigs,SLOT(disableExtrudersQntCB(bool)));
-    //Set extrudersInUse on ManualControl
     connect(ui->PrinterConfigs,SIGNAL(_extrudersInUse(int)),ui->ManualControl,SLOT(_extrudersInUse(int)));
-    //Set Status of PlayButton on ManualControl
     connect(this,SIGNAL(btPlayStatus(bool)),ui->ManualControl,SLOT(btPlayStatus(bool)));
-    //Disable ManualControl of 3DPrinter
     connect(this,SIGNAL(disableManualControlTb(bool)),ui->ManualControl,SLOT(disableManualControlTb(bool)));
 }
 /*-----------Actions of MenuBar----------*/
