@@ -9,10 +9,15 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUXX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 endif()
 
+find_package(GDAL REQUIRED)
+find_package(MPI REQUIRED)
+find_package(HDF5 REQUIRED)
 find_package(VTK REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Test LinguistTools OpenGL)
+
+include(${VTK_USE_FILE})
 
 include_directories(.
 	${CMAKE_CURRENT_BINARY_DIR}
@@ -39,12 +44,15 @@ set(Widgets_SRCS
 )
 
 set(Br-Print_SRCS
-	arduinolistener.cpp
-	brprint3d.cpp
-	glwidget.cpp
-	main.cpp
-	points.cpp
+	arduinolistener.cpp  
+	glwidget.cpp  
+	ManualControlWidget.cpp  
+	PrinterSettings.cpp        
 	threadRotine.cpp
+	BrPrint3D.cpp        
+	main.cpp      
+	points.cpp               
+	PrinterSettingsWidget.cpp
 )
 
 #qt5_add_translation(TRANSLATIONS EN_english.ts PT_portuguese.ts)
@@ -65,6 +73,12 @@ add_custom_target(resources ALL DEPENDS ${Resources})
 
 add_executable(BRPrint ${KI_SRCS} ${Widgets_SRCS} ${Br-Print_SRCS} ${Resources})
 
-target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL pthread ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${VTK_LIBRARIES})
+target_link_libraries(BRPrint 
+	Qt5::Core Qt5::Widgets Qt5::OpenGL
+	${OPENGL_LIBRARIES} 
+	${GLUT_LIBRARY} 
+	${VTK_LIBRARIES}
+	pthread
+)
 
 enable_testing()
