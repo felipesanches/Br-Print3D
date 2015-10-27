@@ -159,20 +159,27 @@ void BrPrint3D::init()
 {   Loading *l=new Loading();
     //l->setParent(this,Qt::Window);
     //l->show();
+    //Call init Printer Configs
     ui->PrinterConfigs->init(&settings);
+    //Call init Manual Control
     ui->ManualControl->init();
+    //Hide Config Menu
     ui->PrinterConfigs->hide();
+    //Disable Play Button
     ui->bt_play->setEnabled(false);
-
     //Start the thread that is listening if Arduino is connect or not
     this->ard_List = new arduinoListener;
     connect(ard_List,SIGNAL(arduinoConnect(bool)),this,SLOT(locate_Arduino(bool)));
     this->ard_List->start();
-
+    //Connect a signal to hide extruders if change on qnt of extruders
     connect(ui->PrinterConfigs,SIGNAL(hideExtruders(int)),ui->ManualControl,SLOT(hideExtruders(int)));
+    //Connect a signal to disable the extruderCB on PrinterConfigs
     connect(ui->ManualControl,SIGNAL(disableExtrudersQntCB(bool)),ui->PrinterConfigs,SLOT(disableExtrudersQntCB(bool)));
+    //Set extrudersInUse on ManualControl
     connect(ui->PrinterConfigs,SIGNAL(_extrudersInUse(int)),ui->ManualControl,SLOT(_extrudersInUse(int)));
+    //Set Status of PlayButton on ManualControl
     connect(this,SIGNAL(btPlayStatus(bool)),ui->ManualControl,SLOT(btPlayStatus(bool)));
+    //Disable ManualControl of 3DPrinter
     connect(this,SIGNAL(disableManualControlTb(bool)),ui->ManualControl,SLOT(disableManualControlTb(bool)));
 }
 /*-----------Actions of MenuBar----------*/
@@ -197,7 +204,7 @@ void BrPrint3D::on_actionPortuguese_triggered()
 //This action show on screen the Legal Warning Window of BrPrint
 void BrPrint3D::on_actionLegalWarning_triggered()
 {
-    LegalWarning *w=new LegalWarning();
+    LegalWarning *w = new LegalWarning();
     w->show();
 
 }
@@ -229,18 +236,12 @@ void BrPrint3D::on_actionAboutBrPrint_triggered()
 }
 /*----------Actions---------------------*/
 //This action Hide/Show The Configuration of Printer
-void BrPrint3D::on_bt_Hide_clicked()
+void BrPrint3D::on_bt_Hide_clicked(bool checked)
 {
-    if(ui->bt_Hide->text()==tr("Settings - Show"))
-    {
-        ui->bt_Hide->setText(tr("Settings - Hide"));
-        ui->PrinterConfigs->show();
-    }
-    else
-    {
-        ui->bt_Hide->setText(tr("Settings - Show"));
-        ui->PrinterConfigs->hide();
-    }
+    if(checked)
+      ui->PrinterConfigs->show();
+    else 
+      ui->PrinterConfigs->hide();
 }
 
 //This function locate the port that the arduino is connect

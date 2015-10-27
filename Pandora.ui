@@ -291,6 +291,12 @@
         <property name="text">
          <string>Settings - Show</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -318,6 +324,9 @@
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="handleWidth">
+       <number>10</number>
       </property>
       <widget class="PrinterSettingsWidget" name="PrinterConfigs" native="true">
        <property name="sizePolicy">

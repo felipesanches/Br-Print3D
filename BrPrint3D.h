@@ -52,7 +52,6 @@ public:
 
 private slots:
     void locate_Arduino(bool b);
-    //void on_bt_hide_clicked();
 
     void on_bt_import_clicked();
     void on_bt_open_clicked();
@@ -82,7 +81,7 @@ private slots:
 
     void on_actionAboutBrPrint_triggered();
 
-    void on_bt_Hide_clicked();
+    void on_bt_Hide_clicked(bool checked);
 
 private:
 
