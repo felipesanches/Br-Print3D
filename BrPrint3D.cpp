@@ -16,8 +16,6 @@ BrPrint3D::~BrPrint3D()
 }
 
 QSettings settings(QDir::currentPath()+"/br.ini",QSettings::IniFormat); //INI File
-
-
 /*******************************************************************************************************************/
 /* Code Organization - English
  * Function Init
@@ -161,20 +159,14 @@ void BrPrint3D::init()
 {   Loading *l=new Loading();
     //l->setParent(this,Qt::Window);
     //l->show();
-
     //Call init Printer Configs
     ui->PrinterConfigs->init(&settings);
-
     //Call init Manual Control
     ui->ManualControl->init();
-
-
     //Hide Config Menu
     ui->PrinterConfigs->hide();
-
     //Disable Play Button
     ui->bt_play->setEnabled(false);
-
     //Start the thread that is listening if Arduino is connect or not
     this->ard_List = new arduinoListener;
     connect(ard_List,SIGNAL(arduinoConnect(bool)),this,SLOT(locate_Arduino(bool)));
@@ -242,13 +234,6 @@ void BrPrint3D::on_actionAboutBrPrint_triggered()
     aboutBrPrint *w= new aboutBrPrint();
     w->show();
 }
-
-
-
-
-
-
-
 /*----------Actions---------------------*/
 //This action Hide/Show The Configuration of Printer
 void BrPrint3D::on_bt_Hide_clicked()
@@ -288,8 +273,10 @@ void BrPrint3D::locate_Arduino(bool b)
             for(int i = 0; look[i] != ':'; i++)
                 port+=look[i];
             if(ant!=port)
-            {   ports.append("/dev/"+port);
-                ant=port;
+            {   if(port!="/dev/ttyACM0" && port!="/dev/USB0")
+                {   ports.append("/dev/"+port);
+                    ant=port;
+                }
             }
             port.clear();
             look = strstr(look, "Arduino");
