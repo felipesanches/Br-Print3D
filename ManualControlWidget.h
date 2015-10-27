@@ -80,7 +80,7 @@ private slots:
     void disableManualControlTb(bool b);
 
 signals:
-    void disableExtrudersQntCB();
+    void disableExtrudersQntCB(bool b);
 };
 
 #endif // MANUALCONTROLWIDGET_H
