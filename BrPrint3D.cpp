@@ -267,7 +267,7 @@ void BrPrint3D::locate_Arduino(bool b)
             for(int i = 0; look[i] != ':'; i++)
                 port+=look[i];
             if(ant!=port)
-            {   if(port!="ttyACM0" && port!="USB0")
+            {   if(port!="ttyACM0" && port!="ttyUSB0")
                 {   ports.append("/dev/"+port);
                     ant=port;
                 }
