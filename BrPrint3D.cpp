@@ -380,15 +380,16 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
     int maxX,maxY,maxZ,transmitionRate,bufferSize;
     std::string serialPort;
    if(checked==true)
-   {    this->p = ui->PrinterConfigs->getCurrentSettings();
-        if(!p->areaX.isEmpty() && !p->areaY.isEmpty() && !p->areaZ.isEmpty())
+   {
+        this->p = ui->PrinterConfigs->getCurrentSettings();
+        if(!p.areaX.isEmpty() && !p.areaY.isEmpty() && !p.areaZ.isEmpty())
         {
-            maxX = p->areaX.toInt();
-            maxY = p->areaY.toInt();
-            maxZ = p->areaZ.toInt();
-            transmitionRate = p->transmissionRate.toInt();
-            serialPort = p->connectionPort.toInt();
-            bufferSize = p->cacheSize.toInt();
+            maxX = p.areaX.toInt();
+            maxY = p.areaY.toInt();
+            maxZ = p.areaZ.toInt();
+            transmitionRate = p.transmissionRate.toInt();
+            serialPort = p.connectionPort.toInt();
+            bufferSize = p.cacheSize.toInt();
             emit disableManualControlTb(false);
         }
         else
@@ -399,7 +400,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
              return;
         }
 
-        if(p->resetOnConnect==true)
+        if(p.resetOnConnect==true)
              this->resetWhenConnect = true;
         else
              this->resetWhenConnect = false;
@@ -473,7 +474,7 @@ void BrPrint3D::on_bt_play_clicked()
          try
          {
             std::string path = pathGcode.toUtf8().constData();
-            this->printer_object->openFile(path,p->printLog);
+            this->printer_object->openFile(path,p.printLog);
 
           }
          catch(std::string exc)

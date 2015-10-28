@@ -19,11 +19,11 @@ public:
     ~PrinterSettingsWidget();
     void init(QSettings *settings);
     void setConnectionPort(QStringList s);
-    PrinterSettings* getCurrentSettings();
+    PrinterSettings getCurrentSettings();
 
 private:
     Ui::PrinterSettingsWidget *ui;
-    PrinterSettings *loadConfigs(QString q);
+    PrinterSettings loadConfigs(QString q);
     QSettings *settings;
     int extrudersInUse;
 
