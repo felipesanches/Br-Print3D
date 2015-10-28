@@ -388,7 +388,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             maxY = p.areaY.toInt();
             maxZ = p.areaZ.toInt();
             transmitionRate = p.transmissionRate.toInt();
-            serialPort = p.connectionPort.toInt();
+            serialPort = p.connectionPort.toStdString();
             bufferSize = p.cacheSize.toInt();
             emit disableManualControlTb(false);
         }
