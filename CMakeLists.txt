@@ -41,7 +41,6 @@ set(Widgets_SRCS
 set(Br-Print_SRCS
 	arduinolistener.cpp
 	brprint3d.cpp
-	glwidget.cpp
 	main.cpp
 	points.cpp
 	threadRotine.cpp
