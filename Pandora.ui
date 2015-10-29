@@ -337,7 +337,7 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>200</width>
+         <width>315</width>
          <height>0</height>
         </size>
        </property>
@@ -348,12 +348,18 @@
         </size>
        </property>
       </widget>
-      <widget class="GLWidget" name="openGLWidget">
+      <widget class="GLWidget" name="openGLWidget" native="true">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
        </property>
       </widget>
       <widget class="ManualControlWidget" name="ManualControl" native="true">
@@ -365,7 +371,7 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>200</width>
+         <width>440</width>
          <height>0</height>
         </size>
        </property>
@@ -386,7 +392,7 @@
      <x>0</x>
      <y>0</y>
      <width>1023</width>
-     <height>29</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -455,11 +461,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>GLWidget</class>
-   <extends>QOpenGLWidget</extends>
-   <header>glwidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>PrinterSettingsWidget</class>
    <extends>QWidget</extends>
    <header>PrinterSettingsWidget.h</header>
@@ -470,6 +471,11 @@
    <extends>QWidget</extends>
    <header>ManualControlWidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GLWidget</class>
+   <extends>QWidget</extends>
+   <header>glwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>
