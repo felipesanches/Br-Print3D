@@ -8,6 +8,7 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindowInteractor.h>
 
+
 namespace Ui {
 class vtkWidget;
 }
@@ -19,9 +20,10 @@ class vtkWidget : public QVTKWidget2
 public:
   explicit vtkWidget(QVTKWidget2 *parent = 0);
   ~vtkWidget();
+  void renderSTL(QString pathStl);
 private:
   Ui::vtkWidget *ui;
-  void renderSTL(QString pathStl);
+  
   
 };
   
