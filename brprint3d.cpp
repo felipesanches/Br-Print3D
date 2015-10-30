@@ -455,7 +455,7 @@ void BrPrint3D::on_bt_import_clicked()
         {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            readgcode(text);
+            //readgcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
             if(ui->bt_connect->isChecked())
@@ -467,7 +467,7 @@ void BrPrint3D::on_bt_import_clicked()
 //This action open a GCODE or STL file
 void BrPrint3D::on_bt_open_clicked()
 {
-    pathGcode=QFileDialog::getOpenFileName(this, "Open File",QDir::homePath(),"*.gcode");
+    pathGcode=QFileDialog::getOpenFileName(this, "Open File",QDir::homePath(),"*.gcode *.STL *.stl");
 
     if(!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix()=="gcode")
     {   QFile gcode(pathGcode);
@@ -480,15 +480,12 @@ void BrPrint3D::on_bt_open_clicked()
             ui->GCodePreview->setPlainText(text);
         }
     }
-   /* else if(QFileInfo(filename).completeSuffix()=="STL" ||QFileInfo(filename).completeSuffix()=="stl")
+    else 
+    if(!pathGcode.isEmpty() && (QFileInfo(pathGcode).completeSuffix()=="STL") || QFileInfo(pathGcode).completeSuffix()=="stl")
     {
-        //ui->GCodePreview->setPlainText("");
-        //QVector<triangle> QFileInfo(filename).baseName();
-        //ERRADO!
-       // QFile stl(filename);
-        //readstl(filename);
-        //Renderiza Imagem
-    }*/
+      ui->openGLWidget->renderSTL(pathGcode);
+       
+    }
 }
 //This function transform the gcode file on a vector of points and send to OpenGL to draw
 void BrPrint3D::readgcode(QString text)
@@ -528,8 +525,8 @@ void BrPrint3D::readgcode(QString text)
             }//fim for j
         }
     }//fim for i
-  ui->openGLWidget->openGcode(&gcodeDots);
-  ui->openGLWidget->update();
+  //ui->openGLWidget->openGcode(&gcodeDots);
+  //ui->openGLWidget->update();
 }
 //This action connect the 3D printer
 void BrPrint3D::on_bt_connect_clicked(bool checked)

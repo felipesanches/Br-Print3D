@@ -11,6 +11,7 @@
 #include "KI/Repetier.h"
 #include "threadRotine.h"
 #include "arduinolistener.h"
+#include "vtkWidget.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -26,6 +27,7 @@
 #include <QInputDialog>
 #include <QList>
 #include <QStandardPaths>
+
 
 namespace Ui {
 class BrPrint3D;
