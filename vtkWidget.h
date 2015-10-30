@@ -1,18 +1,28 @@
-#include <QVTKWidget.h>
+#include <QVTKWidget2.h>
+#include <vtkPolyData.h>
+#include <vtkSTLReader.h>
+#include <vtkSmartPointer.h>
+#include <vtkPolyDataMapper.h>
+#include <vtkActor.h>
+#include <vtkRenderWindow.h>
+#include <vtkRenderer.h>
+#include <vtkRenderWindowInteractor.h>
 
 namespace Ui {
-class QVTKWidget;
+class vtkWidget;
 }
 
-class vtkWidget : public QVTKWidget
+class vtkWidget : public QVTKWidget2
 {
   Q_OBJECT
   
 public:
-  explicit vtkWidget(QVTKWidget *parent = 0);
+  explicit vtkWidget(QVTKWidget2 *parent = 0);
   ~vtkWidget();
 private:
   Ui::vtkWidget *ui;
-}
+  void renderSTL(QString pathStl);
+  
+};
   
   
