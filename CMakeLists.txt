@@ -11,12 +11,12 @@ endif()
 
 find_package(VTK REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(GLUT REQUIRED)
+#find_package(GLUT REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Test LinguistTools OpenGL)
-
+include(${VTK_USE_FILE})
 include_directories(.
 	${CMAKE_CURRENT_BINARY_DIR}
-	${CMAKE_BINARY_DIR}
+	${CMAKE_BINARY_DIR}	
 	KI
 	Windows
 )
@@ -44,7 +44,7 @@ set(Br-Print_SRCS
 	main.cpp
 	points.cpp
 	threadRotine.cpp
-	vtkWidget.cpp
+        vtkWidget.cpp
 )
 
 #qt5_add_translation(TRANSLATIONS EN_english.ts PT_portuguese.ts)
