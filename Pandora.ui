@@ -2224,15 +2224,16 @@ QSlider::handle:horizontal {
      </item>
     </layout>
    </widget>
-   <widget class="vtkWidget" name="openGLWidget" native="true">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
       <x>425</x>
-      <y>140</y>
+      <y>120</y>
       <width>491</width>
-      <height>526</height>
+      <height>541</height>
      </rect>
     </property>
+    <layout class="QVBoxLayout" name="vtkConteiner"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -2434,14 +2435,6 @@ QSlider::handle:horizontal {
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>vtkWidget</class>
-   <extends>QWidget</extends>
-   <header>vtkWidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>Config</tabstop>
   <tabstop>cb_printer</tabstop>
