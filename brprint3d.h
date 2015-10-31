@@ -157,6 +157,8 @@ private:
     void locate_Cura();
     void connectSignals();
 
+    vtkWidget *vtkView;
+
 protected:
     void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 
