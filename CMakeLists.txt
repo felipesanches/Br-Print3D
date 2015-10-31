@@ -62,8 +62,8 @@ add_custom_target(resources ALL DEPENDS ${Resources})
 
 #add_dependencies(resources translations)
 
-add_executable(BRPrint ${KI_SRCS} ${Widgets_SRCS} ${Br-Print_SRCS} ${Resources})
+add_executable(brprint3d ${KI_SRCS} ${Widgets_SRCS} ${Br-Print_SRCS} ${Resources})
 
-target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL pthread ${OPENGL_LIBRARIES} ${VTK_LIBRARIES})
+target_link_libraries(brprint3d Qt5::Core Qt5::Widgets Qt5::OpenGL pthread ${OPENGL_LIBRARIES} ${VTK_LIBRARIES})
 
 enable_testing()
