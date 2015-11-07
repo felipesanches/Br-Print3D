@@ -308,13 +308,11 @@ void BrPrint3D::on_bt_hide_clicked()
     {
         ui->bt_hide->setText(tr("Configuration - Hide"));
         ui->Menu_Control_Left->show();
-       // ui->openGLWidget->setGeometry(460,160,480,510);
     }
     else
     {
         ui->bt_hide->setText(tr("Configuration - Show"));
         ui->Menu_Control_Left->hide();
-        //ui->openGLWidget->setGeometry(20,160,900,510);
     }
 }
 //This function locate the Sli3er program and save on Ini file
