@@ -1,9 +1,10 @@
 #include "vtkWidget2.h"
 
-vtkWidget2::vtkWidget()
+vtkWidget2::vtkWidget2()
 {
 
 }
+
 void vtkWidget2::renderSTL(QString pathStl)
 {
 
@@ -18,15 +19,15 @@ void vtkWidget2::renderSTL(QString pathStl)
     actor->SetMapper(mapper);
 
     vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
-    vtkRenderWindowInteractor *r = this->GetRenderWindow()->GetInteractor();
-    vtkRenderWindow* renderWindow = vtkRenderWindow::New();
-    r->SetRenderWindow(renderWindow);
+    //vtkRenderWindowInteractor *r = this->GetRenderWindow()->GetInteractor();
+    vtkRenderWindow* renderWindow = this->GetRenderWindow()->GetInteractor()->GetRenderWindow();
+    //renderWindow->SetInteractor(r);
+
     renderWindow->AddRenderer(renderer);
 
     renderer->AddActor(actor);
-    renderer->SetBackground(.0, .5, 1); // Background color green
+    renderer->SetBackground(0, .5, 1); // Background color blue
 
     renderer->ResetCamera();
     renderWindow->Render();
-
 }

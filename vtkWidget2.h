@@ -1,5 +1,6 @@
 #ifndef VTKWIDGET2_H
 #define VTKWIDGET2_H
+#include <QString>
 #include <QVTKWidget2.h>
 #include <vtkPolyData.h>
 #include <vtkSTLReader.h>
@@ -10,6 +11,7 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindowInteractor.h>
 #include <vtkGenericOpenGLRenderWindow.h>
+
 
 class vtkWidget2 : public QVTKWidget2
 {
