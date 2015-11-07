@@ -18,12 +18,18 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindowInteractor.h>
 #include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkCellArray.h>
+#include <vtkCellData.h>
+#include <vtkDoubleArray.h>
+#include <vtkPoints.h>
+#include <vtkPolyLine.h>
 
 class vtkWidget : public QVTKWidget
 {
 public:
     vtkWidget();
     void renderSTL(QString path);
+    void renderGcode(QString text);
 };
 
 #endif // VTKWIDGET2_H
