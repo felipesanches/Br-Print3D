@@ -482,6 +482,8 @@ void BrPrint3D::on_bt_open_clicked()
             vtkView->renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
+            if(ui->bt_connect->isChecked())
+                ui->bt_play->setEnabled(true);
         }
     }
     else 
