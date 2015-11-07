@@ -42,9 +42,6 @@ public:
     explicit BrPrint3D(QWidget *parent = 0);
     ~BrPrint3D();
     void init();
-    void readstl(QString file);
-    void renderGcode(QString str);
-    void readgcode(QString text);
 
 private slots:
     void locate_Arduino(bool b);

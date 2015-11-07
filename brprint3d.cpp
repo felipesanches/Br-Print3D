@@ -164,8 +164,10 @@ void BrPrint3D::init()
     //Init the translator
     //this->translator.load(":/Translations/PT_portuguese.qm");
     //Load the previous configs if them exists
-  vtkView = new vtkWidget();
-  ui->vtkConteiner->addWidget(vtkView);
+    vtkView = new vtkWidget();
+    ui->vtkConteiner->addWidget(vtkView);
+  //vtkView2 = new vtkWidget2;
+  //ui->vtkConteiner->addWidget(vtkView2);
     QStringList groups;
     settings.beginGroup("Printer_Configs");
     groups = settings.childGroups();
@@ -457,7 +459,7 @@ void BrPrint3D::on_bt_import_clicked()
         {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            //readgcode(text);
+            vtkView->renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
             if(ui->bt_connect->isChecked())
@@ -477,7 +479,7 @@ void BrPrint3D::on_bt_open_clicked()
         {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            readgcode(text);
+            vtkView->renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
         }
@@ -487,51 +489,11 @@ void BrPrint3D::on_bt_open_clicked()
     {
 
         vtkView->renderSTL(pathGcode);
-        vtkView2->renderSTL(pathGcode);
+        //vtkView2->renderSTL(pathGcode);
        
     }
 }
-//This function transform the gcode file on a vector of points and send to OpenGL to draw
-void BrPrint3D::readgcode(QString text)
-{
-    QStringList list = text.split("\n",QString::SkipEmptyParts);
 
-
-    float x=0,y=0,z=0;
-    for(int i=0; i!=list.size(); i++)
-    {
-        if(list[i].startsWith(";")==false)
-        {
-            QStringList aux = list[i].split(" ");
-            //qDebug() << QStringList(aux) << "\n";
-            for(int j=1;j!=aux.size();j++)
-            {
-                if(aux[j].startsWith("X") && aux[j+1].startsWith("Y"))
-                {
-                    //ler ponto
-                    QString x_str = aux[j].section("X",1);
-                     x = x_str.toFloat();
-                    QString y_str = aux[j+1].section("Y",1);
-                     y = y_str.toFloat();
-                      Points *p= new Points();
-                      p->addPoint(x,y,z);
-                      gcodeDots.append(p);
-                }
-               else if(aux[j].startsWith("Z"))
-                {
-                  //ler ponto
-                    QString z_str = aux[j].section("Z",1);
-                    z = z_str.toFloat();
-                    Points *p= new Points();
-                    p->addPoint(x,y,z);
-                    gcodeDots.append(p);
-                }
-            }//fim for j
-        }
-    }//fim for i
-  //ui->openGLWidget->openGcode(&gcodeDots);
-  //ui->openGLWidget->update();
-}
 //This action connect the 3D printer
 void BrPrint3D::on_bt_connect_clicked(bool checked)
 {  QMessageBox msg;
