@@ -12,6 +12,7 @@
 #include "threadRotine.h"
 #include "arduinolistener.h"
 #include "vtkWidget.h"
+#include "vtkWidget2.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -158,6 +159,7 @@ private:
     void connectSignals();
 
     vtkWidget *vtkView;
+    vtkWidget2 *vtkView2;
 
 protected:
     void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;

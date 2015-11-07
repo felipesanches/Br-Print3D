@@ -487,6 +487,7 @@ void BrPrint3D::on_bt_open_clicked()
     {
 
         vtkView->renderSTL(pathGcode);
+        vtkView2->renderSTL(pathGcode);
        
     }
 }
