@@ -638,7 +638,7 @@
          <rect>
           <x>15</x>
           <y>10</y>
-          <width>184</width>
+          <width>186</width>
           <height>116</height>
          </rect>
         </property>
@@ -713,7 +713,7 @@
          <rect>
           <x>15</x>
           <y>135</y>
-          <width>197</width>
+          <width>199</width>
           <height>78</height>
          </rect>
         </property>
@@ -2141,35 +2141,6 @@ QSlider::handle:horizontal {
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="bt_stop">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-stop</normaloff>:/Icons/Icons/bt-stop</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="bt_pause">
        <property name="enabled">
         <bool>false</bool>
@@ -2196,6 +2167,35 @@ QSlider::handle:horizontal {
        </property>
        <property name="checkable">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_stop">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/Icons/Icons/bt-stop</normaloff>:/Icons/Icons/bt-stop</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
