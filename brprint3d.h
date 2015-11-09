@@ -7,7 +7,6 @@
 #include <Windows/help.h>
 #include <Windows/legalwarning.h>
 #include <Windows/loading.h>
-#include "points.h"
 #include "KI/Repetier.h"
 #include "threadRotine.h"
 #include "arduinolistener.h"
@@ -140,9 +139,6 @@ private:
     QString pathslicer;                         //Caminho do slicer
     QString pathcura;                           //Caminho Cura
     QString pathextern;                         //Caminho slicer externo
-
-    //Lista de Pontos do gcode
-    QList<Points*> gcodeDots;
     //
     QString pathGcode;                  //Caminho do GCODE
 
